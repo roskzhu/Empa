@@ -1,5 +1,30 @@
-# empathy-enhancer
-shehacks 8
+<div align="center">
+    <div id="user-content-toc">
+      <ul>
+          <summary><h1 style="display: inline-block; margin-bottom:0px">Empa</h1></summary>
+      </ul>
+    </div>
+    <h3>description</h3>
+<!--     <h4><i>xxx</i></h4> -->
+       <br>
+    <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"/>> -->
+    <img src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white"/>
+    <br><br>
+</div>
+
+
+
+(insert cover img here)
+(insert demo video if possible here
+
+(insert a short description/hook here)
+
+
+## Features
+- Radar chart showing emotion metrics
+- Transcribed audio to text, and recommended phrases for the emotion detected/expressed
+- Intuitive GUI and beautiful gorgeous perfect frontend design
+(to be added)
 
 
 ## How it works
@@ -12,31 +37,53 @@ shehacks 8
 - y are facial coordinates per image
 - `landmarking_model` -> Trained custom model using Tensorflow and Sci-kit Learn, using landmarked data from the CSV
 
-## Features
-- Radar chart showing emotion metrics
-- Transcribed audio to text, and recommended phrases for the emotion detected/expressed
-- Intuitive GUI and beautiful gorgeous perfect frontend design
 
-
+## Architecture Overview
+(to be added)
 
 
 ## Getting Started
+
+### Prerequisites
+1. Before you begin, ensure you have met the following requirements:
+- [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
+
+2. Install required dependencies in root folder and both frontend and backend folders
+```
+npm install
+```
+
+3. Create a `.env` file in this folder with the following variables:
+```
+OPENAI_API_KEY={YOUR_API_KEY}
+```
 
 ### Starting the server
 
 _(127.0.0.1:5000 by default)_
 
 1. `cd server`
-1. `python3 -m venv venv`
-1. `source venv/bin/activate` (MacOS)
-1. `venv\Scripts\activate` (Windows Powershell)
-1. `pip install -r requirements.txt`
-1. `python3 app.py`
+2. `python3 -m venv venv`
+3. `source venv/bin/activate` (MacOS)
+4. `venv\Scripts\activate` (Windows Powershell)
+5. `pip install -r requirements.txt`
+6. `python3 app.py`
 
 ### Starting the app
 
 _(localhost:3000 by default)_
 
 1. `cd client`
-1. `npm install`
-1. `npm start`
+2. `npm install`
+3. `npm start`
+
+
+
+### Sneak Peak
+(add imgs from frontend here)
+
+## Next Steps
+- [X] text
+- [ ] add firebase for accounts and database if needed???
+- [ ] deployment
+- [ ] we should add these to show scalability :)
