@@ -12,12 +12,41 @@ import {
   FACEMESH_FACE_OVAL,
   FACEMESH_LIPS,
 } from "@mediapipe/face_mesh";
+import axios from "axios";
 
 function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const connect = window.drawConnectors;
   var camera = null;
+
+  const landmarkDataRef = useRef([]); // Ref to store the latest landmark data
+
+  const sendLandmarkData = () => {
+    console.log(landmarkDataRef.current);
+    axios
+
+      .post("http://127.0.0.1:5000/receive_data", {
+        landmarks: landmarkDataRef.current,
+      })
+      .then((response) => {
+        console.log("Data sent successfully");
+      })
+      .catch((error) => {
+        console.error("Error sending data:", error);
+      });
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (landmarkDataRef.current.length > 0) {
+        sendLandmarkData();
+      }
+    }, 1000);
+
+    return () => clearInterval(intervalId); // Clear interval on component unmount
+  }, []);
+
   function onResults(results) {
     // const video = webcamRef.current.video;
     const videoWidth = webcamRef.current.video.videoWidth;
@@ -67,6 +96,9 @@ function App() {
           color: "#E0E0E0",
         });
       }
+      landmarkDataRef.current = results.multiFaceLandmarks.map((landmarks) =>
+        landmarks.map((lm) => ({ x: lm.x, y: lm.y, z: lm.z }))
+      );
     }
     canvasCtx.restore();
   }
