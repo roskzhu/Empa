@@ -1,15 +1,6 @@
 # empathy-enhancer
 shehacks 8
 
-react typescript
-
-python flask
-
-mediapipe
-
-the csv from landmarking for mediapipe:
-- x is the emotion (label) for the image
-- y are facial coordinates per image
 
 ## How it works
 - Flask backend
@@ -17,6 +8,8 @@ the csv from landmarking for mediapipe:
 
 ### How we trained the model
 - `landmarking.ipynb` -> Downloaded FER2013 dataset (imgs), and used Mediapipe to landmark 463 facial points, writing this to a CSV (`fer2013_landmarks_nopathsfixed.csv`)
+- x is the emotion (label) for the image
+- y are facial coordinates per image
 - `landmarking_model` -> Trained custom model using Tensorflow and Sci-kit Learn, using landmarked data from the CSV
 
 ## Features
