@@ -1,0 +1,9 @@
+/venv
+
+.env
+
+fer2013.csv
+fer2013_landmarks.csv
+fer2013_landmarks_nopaths.csv
+fer2013_landmarks_nopathsfixed.csv
+/dataset
