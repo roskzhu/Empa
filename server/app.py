@@ -1,10 +1,17 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from dotenv import load_dotenv
 import os
 import openai
 
-
 app = Flask(__name__)
+CORS(app)
+
+@app.route('/receive_data', methods=['POST'])
+def receive_data():
+    data = request.json
+    print(data)  # This will print the data to the console
+    return jsonify({'message': 'Data received successfully!'})
 
 # Load environment variables from .env
 load_dotenv()
