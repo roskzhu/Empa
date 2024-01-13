@@ -11,6 +11,21 @@ the csv from landmarking for mediapipe:
 - x is the emotion (label) for the image
 - y are facial coordinates per image
 
+## How it works
+- Flask backend
+- Vanilla React frontend
+
+### How we trained the model
+- `landmarking.ipynb` -> Downloaded FER2013 dataset (imgs), and used Mediapipe to landmark 463 facial points, writing this to a CSV (`fer2013_landmarks_nopathsfixed.csv`)
+- `landmarking_model` -> Trained custom model using Tensorflow and Sci-kit Learn, using landmarked data from the CSV
+
+## Features
+- Radar chart showing emotion metrics
+- Transcribed audio to text, and recommended phrases for the emotion detected/expressed
+- Intuitive GUI and beautiful gorgeous perfect frontend design
+
+
+
 
 ## Getting Started
 
