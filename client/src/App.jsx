@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import createEmotionRadarChart from './components/emotionRadar';
+import './components/emotionRadar.css';
+
 
 const App = () => {
   const canvasRef = useRef(null);
@@ -7,7 +9,7 @@ const App = () => {
 
   useEffect(() => {
     // Dummy emotion data
-    const emotionData = [60, 30, 5, 2, 1, 1, 1];
+    const emotionData = [50, 30, 10, 7, 3, 0, 0];
 
     if (canvasRef.current) {
       // Destroy the previous chart
@@ -28,10 +30,11 @@ const App = () => {
   }, []); // Add dependencies if needed
 
   return (
-    <div>
-      <canvas ref={canvasRef}></canvas>
+    <div className="emotion-radar-chart">
+      <canvas ref={canvasRef} className="emotion-radar-canvas"></canvas>
     </div>
   );
+  
 };
 
 export default App;

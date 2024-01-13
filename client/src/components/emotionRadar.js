@@ -1,7 +1,7 @@
 import Chart from 'chart.js/auto';
 
 const createEmotionRadarChart = (canvasElement, emotionData) => {
-    return new Chart(canvasElement, {
+  return new Chart(canvasElement, {
     type: 'radar',
     data: {
       labels: ['Happiness', 'Neutral', 'Sadness', 'Anger', 'Disgust', 'Fear', 'Surprise'],
@@ -19,12 +19,28 @@ const createEmotionRadarChart = (canvasElement, emotionData) => {
           angleLines: {
             display: false
           },
+          ticks: {
+            display: false,
+            stepSize: 20 // number of grid lines
+          },
           suggestedMin: 0,
-          suggestedMax: 100
+          suggestedMax: 100,
+          pointLabels: {
+            display: true // emotion labels displayed
+          },
+        //   grid: {
+        //     circular: false
+        //   }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false // This ensures that the legend is not displayed
         }
       }
     }
-  });
+    
+});
 };
 
 export default createEmotionRadarChart;
