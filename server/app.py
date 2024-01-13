@@ -20,13 +20,13 @@ if api_key is None:
 def generate_phrases_for_emotion(emotion):
     prompt = f"Generate phrases to address/soothe someone feeling {emotion}."
     response = openai.Completion.create(
-        engine="text-davinci-003",
+        engine="gpt-3.5-turbo-instruct",
         prompt=prompt,
         max_tokens=150,
         n=5,
         stop=None,
     )
-    phrases = [choice['text'] for choice in response['choices']]
+    phrases = [choice['text'].strip() for choice in response['choices']]
     return phrases
 
 @app.route('/generate_phrases', methods=['POST'])
