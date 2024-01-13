@@ -1,7 +1,7 @@
 # empathy-enhancer
 shehacks 8
 
-react typescript
+react javascript
 
 python flask
 
