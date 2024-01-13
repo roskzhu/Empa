@@ -1,3 +1,5 @@
 /venv
 
+# Don't include the dataset file, too big
 /dataset
+fer2013_landmarks.csv
