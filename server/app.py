@@ -30,7 +30,7 @@ def analyze_emotion(text):
     return emotion
 
 def generate_phrases_for_emotion(emotion):
-    prompt = f"Generate phrases to address/soothe someone feeling {emotion}."
+    prompt = f"Generate phrases to respond to someone feeling {emotion}."
     response = openai.Completion.create(
         engine="gpt-3.5-turbo-instruct",
         prompt=prompt,
