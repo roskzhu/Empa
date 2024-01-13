@@ -17,6 +17,18 @@ print(api_key)
 if api_key is None:
     raise ValueError("OpenAI API key is not set in the environment variable OPENAI_API_KEY")
 
+
+# Function to determine emotion from text
+def analyze_emotion(text):
+    prompt = f"Determine the emotion expressed in the following text: {text}"
+    response = openai.Completion.create(
+        engine="davinci-codex",
+        prompt=prompt,
+        max_tokens=150,
+    )
+    emotion = response['choices'][0]['text'].strip()
+    return emotion
+
 def generate_phrases_for_emotion(emotion):
     prompt = f"Generate phrases to address/soothe someone feeling {emotion}."
     response = openai.Completion.create(
@@ -33,10 +45,11 @@ def generate_phrases_for_emotion(emotion):
 def generate_phrases():
     data = request.get_json()
 
-    if 'emotion' not in data:
-        return jsonify({'error': 'Missing "emotion" parameter'}), 400
+    if 'text' not in data:
+        return jsonify({'error': 'Missing "text" parameter'}), 400
 
-    emotion = data['emotion']
+    text = data['text']
+    emotion = analyze_emotion(text)
     generated_phrases = generate_phrases_for_emotion(emotion)
 
     return jsonify({'phrases': generated_phrases})
