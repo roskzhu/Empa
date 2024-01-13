@@ -7,6 +7,11 @@ python flask
 
 mediapipe
 
+the csv from landmarking for mediapipe:
+- x is the emotion (label) for the image
+- y are facial coordinates per image
+
+
 ## Getting Started
 
 ### Starting the server
