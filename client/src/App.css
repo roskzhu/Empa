@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.main-container {
+  display: flex;
+}
+
+.emotion-radar-chart {
+  width: 50%;
+  /* ... other styles ... */
+}

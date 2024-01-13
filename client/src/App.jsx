@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import createEmotionRadarChart from './components/emotionRadar';
 import './components/emotionRadar.css';
-
+import CameraFeed from './components/CameraFeed.js';
+import './components/CameraFeed.css';
 
 const App = () => {
   const canvasRef = useRef(null);
@@ -30,8 +31,11 @@ const App = () => {
   }, []); // Add dependencies if needed
 
   return (
-    <div className="emotion-radar-chart">
-      <canvas ref={canvasRef} className="emotion-radar-canvas"></canvas>
+    <div className="main-container">
+      <CameraFeed />
+      <div className="emotion-radar-chart">
+        <canvas ref={canvasRef} className="emotion-radar-canvas"></canvas>
+      </div>
     </div>
   );
   
