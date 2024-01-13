@@ -22,7 +22,7 @@ if api_key is None:
 def analyze_emotion(text):
     prompt = f"Determine the emotion expressed in the following text: {text}"
     response = openai.Completion.create(
-        engine="davinci-codex",
+        engine="gpt-3.5-turbo-instruct",
         prompt=prompt,
         max_tokens=150,
     )
