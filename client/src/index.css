@@ -6,11 +6,10 @@
 @font-face {
   font-family: 'Satoshi';
   src: url('../public/fonts/Satoshi-Bold.otf') format('otf'),
-       /* url('../public/fonts/Satoshi-Semibold.otf') format('otf'), */
+       url('../public/fonts/Satoshi-Black.otf') format('otf'),
        url('../public/fonts/Satoshi-Medium.otf') format('otf'),
        url('../public/fonts/Satoshi-Regular.otf') format('otf'),
        url('../public/fonts/Satoshi-Light.otf') format('otf'),
-       /* url('../public/fonts/Satoshi-Extralight.otf') format('otf'); */
 }
 
 body {
