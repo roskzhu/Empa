@@ -38,3 +38,7 @@ h3 {
 a {
   text-decoration: none;
 }
+
+button {
+  font-family: 'Inter', sans-serif;
+}
