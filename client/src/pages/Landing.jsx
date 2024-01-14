@@ -1,5 +1,6 @@
 import React from 'react';
 import Carousel from '../components/carousel/CarouselWrapper';
+import { Link } from 'react-router-dom';
 
 const Landing = () => {
   const redirectToMain = () => {
@@ -19,23 +20,23 @@ const Landing = () => {
       </h2>
 
       <div className='blurb'>
-          <p className="text-black/60 text-3xl leading-relaxed font-medium pb-10 w-1/2"> 
+          <p className="text-black/60 text-3xl leading-relaxed font-medium pb-20 w-1/2"> 
             {/* Unlock the power of non-verbal communication with Empa – the cutting-edge tool designed to decode emotions in audio and video expressions.  */}
             Gain real-time insights into the unspoken language, receiving personalized feedback to
             enhance your communication skills in virtual meetings, presentations, and interviews. 
             {/* Empa not only deciphers emotions but provides actionable insights on addressing specific feelings effectively, empowering you to build stronger connections.  */}
           </p>
       </div>
-      <button className='explore-button font-semibold rounded-full text-3xl p-6 px-9' 
-              onClick={redirectToMain}>
+        <Link className='explore-button font-semibold rounded-full text-3xl p-6 px-9' 
+              onClick="{redirectToMain}">
             Explore now
-        </button>
+        </Link>
         </div>
         <div className='absolute justify-end w-full flex align-center pt-60 pr-60'>
           <img className='w-1/3' src='/blob1.png' alt='Image Description'/>
         </div>
 
-        <Carousel/>
+        {/* <Carousel/> */}
     </div>
   );
 };
