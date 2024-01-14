@@ -1,17 +1,21 @@
+/* Import Statements */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 
-
+/* Font-Face Definitions */
 @font-face {
   font-family: 'Satoshi';
   src: url('../public/fonts/Satoshi-Bold.otf') format('otf'),
        url('../public/fonts/Satoshi-Black.otf') format('otf'),
        url('../public/fonts/Satoshi-Medium.otf') format('otf'),
        url('../public/fonts/Satoshi-Regular.otf') format('otf'),
-       url('../public/fonts/Satoshi-Light.otf') format('otf'),
+       url('../public/fonts/Satoshi-Light.otf') format('otf');
 }
 
+/* Style Definitions */
 body {
   margin: 0;
   font-family: 'Satoshi', sans-serif;
@@ -25,25 +29,22 @@ code {
     monospace;
 }
 
-/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-p {
+/* Uncommented and integrated from the first file */
+p, h1, h2, h3, a, button {
   font-family: 'Inter', sans-serif;
 }
 
 h1 {
-  font-family: 'Inter', sans-serif;
   font-weight: 700;
   margin: 0;
 }
 
 h2 {
-  font-family: 'Inter', sans-serif;
   font-weight: 600;
   margin: 0;
 }
 
 h3 {
-  font-family: 'Inter', sans-serif;
   font-weight: 500;
 }
 
@@ -53,4 +54,31 @@ a {
 
 button {
   font-family: 'Inter', sans-serif;
-} */
+}
+
+/* Styles from the second file */
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  font-family: "Montserrat", sans-serif;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  height: 100vh;
+  width: 100vw;
+}
+
+h1 {
+  position: absolute;
+  font-size: 3rem;
+  font-weight: 700;
+}
