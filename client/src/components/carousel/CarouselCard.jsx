@@ -1,59 +1,64 @@
-import React from 'react';
+import React from 'react'
+import styled from '@emotion/styled'
 
-// interface MetricsProps {
-//   card:{
-//     _id: string;
-//     organization_Name: string;
-//     overnight_Service_Type: string;
-//     program_Model: string;
-//     service_User_Count: number;
-//     capacity_Actual_Room: number; 
-//   };
-// }
-
-const CarouselCard = ({ card }) => {
-
+const CarouselCard = ({card}) => {
   return (
-    <div className="h-400px mx-2 w-200px grid place-items-center font-rubik font-semibold 
-                    relative bg-white/10 hover:bg-white/20 hover:backdrop-blur bg-cover bg-center 
-                    pb-5 text-center justify-center max-w-screen-xl overflow-hidden
-                    ">
-      <div className="w-full mt-4 text-center">
-        <div className="text-center justify-center">
-          <p className="text-white/90 font-light text-base p-1 px-4 bg-white/10 w-full">
-            {card.organization_Name}
-          </p>
-          <div className="flex justify-evenly">
-            <p className="text-white/70 font-light text-sm mt-1">
-              {card.overnight_Service_Type}
-              {"   ·   "}
-              {card.program_Model} 
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-evenly">
-          <div className="mr-3">
-            <p className="bg-gradient-to-r from-pink-500 to-pink-100 text-transparent bg-clip-text text-fill-transparent
-                         font-semibold text-8xl uppercase mt-3">
-              {card.service_User_Count} 
-            </p>
-            <p className="text-white font-light text-md uppercase mt-3">
-              users using this service
-            </p>
-          </div>
-          <div className="ml-3">
-            <p className="bg-gradient-to-r from-indigo-500 to-blue-400 text-transparent bg-clip-text text-fill-transparent
-                         font-semibold text-8xl uppercase mt-3">
-              {card.capacity_Actual_Room} 
-            </p>
-            <p className="text-white font-light text-md uppercase mt-3">
-              capacity left
-            </p>
-          </div>
-        </div>
+    <div className="m-2 border-rounded">
+      <div className="bg-blue-200">
+        img here
       </div>
+      <p className='content'>{card.content}</p>
+      <p className='answer'>{card.answer}</p>
     </div>
-  );
-};
+  )
+}
 
-export default CarouselCard;
+const CardContainer = styled.div`
+  height: 300px;
+  width: calc(95% - 80px);
+  display: grid;
+  background-color: #F5F5F7;
+  border-radius: 8px;
+  margin-left: 20px;
+  font-weight: 600;
+  font-size: 35px;
+  position: relative;
+  padding: 40px;
+  align-items: center;
+  .answer {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    opacity: 0;
+    transition: opacity 300ms;
+    font-size: 2em;
+    text-align: center;
+    justify-content: center;
+  }
+  .content {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    transition: opacity 300ms;
+  }
+  :hover {
+    .content {
+      opacity: 0;
+    }
+    .answer {
+      opacity: 1;
+    }
+    background-image: linear-gradient(to bottom right, #FCA27C, #FF5AB4);
+    color: white;
+  }
+  span {
+    background-image: linear-gradient(to bottom right, #FCA27C, #FF5AB4);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent;
+  }
+`
+
+export default CarouselCard
