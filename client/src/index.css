@@ -17,7 +17,7 @@ body {
   font-family: 'Satoshi', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 code {
@@ -25,32 +25,12 @@ code {
     monospace;
 }
 
-/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-p {
-  font-family: 'Inter', sans-serif;
+.slick-prev {
+  left: unset !important;
+  visibility: hidden;
 }
 
-h1 {
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  margin: 0;
+.slick-next {
+  right: unset !important;
+  visibility: hidden;
 }
-
-h2 {
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  margin: 0;
-}
-
-h3 {
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-}
-
-a {
-  text-decoration: none;
-}
-
-button {
-  font-family: 'Inter', sans-serif;
-} */
