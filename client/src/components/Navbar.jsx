@@ -24,7 +24,7 @@ const Navbar = () => {
         <h1 className="mx-6 pt-3 hover:border-b-2 border-blue-600 hover:text-blue-600">Devpost</h1>
       </Link>
 
-      <ul className="flex p-3 px-8 rounded-full text-white bg-blue-600 font-semibold">
+      <ul className="flex p-3 px-8 rounded-full text-white bg-blue-600 font-semibold hover-effect">
         <Link to="/main">
           <li className="">Try Now</li>
         </Link>
