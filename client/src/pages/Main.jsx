@@ -15,7 +15,7 @@ import {
 import axios from "axios";
 import createEmotionRadarChart from '../components/emotionRadar';
 import '../components/emotionRadar.css';
-// import './Main.css';
+import './Main.css';
 
 function Main() {
   
@@ -259,10 +259,11 @@ function Main() {
         ></canvas>
       </div>
 
-      <div style={{ flex: 1, padding: "0 20px" }}>
-        <div className="emotion-radar-chart">
-          <canvas ref={emotionCanvasRef} className="emotion-radar-canvas"></canvas>
-        </div>
+      <div className="emotion-radar-chart">
+        <canvas ref={emotionCanvasRef} className="emotion-radar-canvas"></canvas>
+      </div>
+
+      <div className="transcription-container">
         <button onClick={startTranscription} disabled={isTranscribing}>
           Start Transcription
         </button>

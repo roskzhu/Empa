@@ -40,7 +40,32 @@
     flex-direction: column;
     align-items: flex-start; /* Align buttons to the left */
   }
-  
+
+  .transcription-container button {
+    font-size: 1em; /* Makes the text inside the buttons larger */
+    padding: 10px 20px; /* Adds padding inside the buttons for a larger clickable area */
+    margin: 0 0 20px 0; /* Adds margin to the bottom of each button */
+    border: 1px solid #30abed; /* Adds a border to the button, you can choose any color */
+    border-radius: 5px; /* Rounds the corners of the buttons */
+    background: linear-gradient(45deg, #7ecfd5, #4f54ea); /* Sets the background color of the button */
+    color: white; /* Sets the text color inside the button */
+    cursor: pointer; /* Changes the cursor to indicate the button is clickable */
+    transition: background-color 0.3s; /* Adds a transition effect when hovering or focusing */
+  }
+/* Change the button background color on hover and focus for visual feedback */
+.transcription-container button:hover,
+.transcription-container button:focus {
+  background-color: #0056b3;
+}
+
+/* If you have specific classes or IDs for your buttons, use them for more precise targeting */
+.transcription-container .start-button {
+  /* Additional styles for the start button */
+}
+
+.transcription-container .stop-button {
+  /* Additional styles for the stop button */
+}
   .suggestions-container {
     flex-basis: 50%; /* Allocate 50% width */
     /* Add styles for suggestions container */
