@@ -15,6 +15,7 @@ import {
 import axios from "axios";
 import createEmotionRadarChart from '../components/emotionRadar';
 import '../components/emotionRadar.css';
+// import './Main.css';
 
 function Main() {
   
@@ -229,42 +230,29 @@ function Main() {
   };
 
   return (
-    <center>
-      <div className="Main">
+    <div className="Main" style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh" }}>
+      <div style={{ flex: 1 }}>
         <Webcam
           ref={webcamRef}
           style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zindex: 9,
-            width: 640,
-            height: 480,
+            width: "100%",
+            height: "auto"
           }}
         />
         <canvas
           ref={canvasRef}
           className="output_canvas"
           style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zindex: 9,
-            width: 640,
-            height: 480,
+            width: "100%",
+            height: "auto"
           }}
         ></canvas>
-  
+      </div>
+
+      <div style={{ flex: 1, padding: "0 20px" }}>
         <div className="emotion-radar-chart">
           <canvas ref={emotionCanvasRef} className="emotion-radar-canvas"></canvas>
         </div>
-  
         <button onClick={startTranscription} disabled={isTranscribing}>
           Start Transcription
         </button>
@@ -284,9 +272,8 @@ function Main() {
           </div>
         )}
       </div>
-    </center>
+    </div>
   );
-  
 }
 
 export default Main;
