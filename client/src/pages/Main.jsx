@@ -22,10 +22,9 @@ function Main() {
   const emotionCanvasRef = useRef(null);
   const chartRef = useRef(null);
 
-  useEffect(() => {
-    // Dummy emotion data
-    const emotionData = [50, 30, 10, 7, 3, 0, 0];
+  let probabilities = [0, 10, 0, 0, 0, 0, 0];
 
+  useEffect(() => {
     if (emotionCanvasRef.current) {
       // Destroy the previous chart
       if (chartRef.current) {
@@ -35,7 +34,7 @@ function Main() {
       // Create a new chart
       chartRef.current = createEmotionRadarChart(
         emotionCanvasRef.current,
-        emotionData
+        probabilities
       );
     }
 
@@ -63,13 +62,48 @@ function Main() {
       })
       .then((response) => {
         console.log("Data sent successfully");
-        const probabilities = response.data.probabilities;
+        probabilities = response.data.probabilities;
         console.log("Probabilities:", probabilities);
+
+        if (probabilities) {
+          if (emotionCanvasRef.current) {
+            // Destroy the previous chart
+            if (chartRef.current) {
+              chartRef.current.destroy();
+              console.log("chartRef.current:", chartRef.current);
+            }
+      
+            // Create a new chart
+            chartRef.current = createEmotionRadarChart(
+              emotionCanvasRef.current,
+              probabilities
+            );
+            console.log("emotionCanvasRef.current:", emotionCanvasRef.current);
+          }
+        } else {
+          console.error("Received undefined or invalid probabilities from the server.");
+        }
+
       })
       .catch((error) => {
         console.error("Error sending data:", error);
       });
   };
+
+  if (emotionCanvasRef.current) {
+    // Destroy the previous chart
+    if (chartRef.current) {
+      chartRef.current.destroy();
+    }
+
+    // Create a new chart
+    chartRef.current = createEmotionRadarChart(
+      emotionCanvasRef.current,
+      // emotionData
+      probabilities
+    );
+  }
+
 
   useEffect(() => {
     const intervalId = setInterval(() => {
