@@ -10,6 +10,15 @@
   width: 50%;
 }
 
+@keyframes slideRight {
+  from {
+      background-position: left;
+  }
+  to {
+      background-position: right;
+  }
+}
+
 .explore-button {
   /* padding: 10px 20px; */
   /* font-size: 18pt; */
@@ -23,11 +32,17 @@
   transform: scale(1);
   /* Apply transition for a smooth effect */
   transition: transform 0.3s ease-in-out;
+
+  background-size: 200% 100%;
+  background-image: linear-gradient(45deg, #7ecfd5, #1841cc, #4f54ea);
+  transition: transform 0.3s ease-in-out;
+
 }
 
 .explore-button:hover {
   /* Scale the element on hover */
   transform: scale(1.05);
+  animation: slideRight 0.5s ease forwards;
 }
 
 .gradient-container {
