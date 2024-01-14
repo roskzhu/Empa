@@ -4,7 +4,7 @@ const createEmotionRadarChart = (canvasElement, emotionData) => {
   return new Chart(canvasElement, {
     type: 'radar',
     data: {
-      labels: ['Happiness', 'Neutral', 'Sadness', 'Anger', 'Disgust', 'Fear', 'Surprise'],
+      labels: ['Neutral', 'Sadness', 'Anger', 'Disgust', 'Fear', 'Surprise', 'Happiness'],
       datasets: [{
         label: 'Emotions',
         data: emotionData,

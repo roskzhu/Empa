@@ -85,8 +85,15 @@ def receive_data():
         probabilities = model.predict_proba(df)
         probabilities_list = probabilities.tolist()
 
+        # radar chart display order is: ['Neutral', 'Sadness', 'Anger', 'Disgust', 'Fear', 'Surprise', 'Happiness'],
+        # model order is: anger, disgust, fwear, happy, neutral, sad, surprise
+        rearranged_list = [probabilities_list[0][4], probabilities_list[0][5], probabilities_list[0][0], probabilities_list[0][1], probabilities_list[0][2], probabilities_list[0][6], probabilities_list[0][3]]  # reorder the list to match the order of emotions in the model
+   
+        for i in range(len(rearranged_list)):
+            rearranged_list[i] = rearranged_list[i] * 100
+
         # Return the probabilities in the response
-        return jsonify({'probabilities': probabilities_list})
+        return jsonify({'probabilities': rearranged_list})
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
