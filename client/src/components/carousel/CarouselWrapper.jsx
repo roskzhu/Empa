@@ -53,22 +53,27 @@ const Carousel = () => {
 
 const cards = [
   {
+    image: '../../icons/chat.png', 
     content: "Social Interaction Aid",
     answer: "Assists individuals with social communication disorders in interpreting and responding to others' emotions effectively."
   },
   {
+    image: '../../icons/mental-health.png',
     content: "Accessible Mental Health Monitoring",
     answer: "Assists in monitoring and understanding emotional changes in individuals with mental health conditions that affect emotional expression or recognition."
   },
   {
+    image: '../../icons/emotional-intelligence.png',
     content: "Emotional Education for Children",
     answer: " Aids in teaching children, especially those with developmental challenges, about emotions and facial expressions."
   },
   {
+    image: '../../icons/bot.png',
     content: "Virtual Learning Companion",
     answer: "Integrates with online learning platforms to help students with emotional and social learning difficulties."
   },
   {
+    image: '../../icons/message.png',
     content: "Cross-Cultural Communication",
     answer: "Assists in bridging gaps in emotional expression understanding across different cultures, enhancing empathy in diverse environments."
   },
