@@ -2,8 +2,8 @@
   text-align: center;
 }
 
-.content {
-  margin: 50px;
+ {
+  /* margin: 50px; */
 }
 
 .explore-container {
@@ -54,6 +54,10 @@
 
 .background-gradient {
   background: linear-gradient(45deg, #FDFBF3, #E5F2F2, #AECAFB);
+}
+
+.reverse-gradient {
+  background: linear-gradient(45deg, #AECAFB, #FDFBF3, #E5F2F2);
 }
 
 .pink-gradient {
