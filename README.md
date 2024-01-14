@@ -19,23 +19,18 @@
 
 ![image](https://github.com/roskzhu/Empa/assets/110139243/69dcafa4-f4e0-404b-be2d-c92247d32c6c)
 
-(insert demo video if possible here
-
 Empa, a tool that leverages computer vision and machine learning to analyze facial expressions and translate them into recognizable emotions. It's designed to assist individuals with communication disorders in social interactions, help those on the autism spectrum in understanding emotional cues, and enhance empathy in diverse, cross-cultural communications.
 
 ## Features
-- **Social Interaction Aid**"text", - Assists individuals with social communication disorders in interpreting and responding to others' emotions effectively.
+- **Social Interaction Aid**, - Assists individuals with social communication disorders in interpreting and responding to others' emotions effectively.
 - **Autism Support Tool** - Helps those on the autism spectrum who struggle with reading facial expressions to better understand social cues.
 - **Emotional Education for Children** - Aids in teaching children, especially those with developmental challenges, about emotions and facial expressions.
 - **Cross-Cultural Communication** - Assists in bridging gaps in emotional expression understanding across different cultures, enhancing empathy in diverse environments.
 - **Virtual Learning Companion** - Integrates with online learning platforms to help students with emotional and social learning difficulties.
 - **Relationship Building for Neurodiverse Couples** - Helps partners where one or both individuals have difficulties with emotion recognition to better understand each other's feelings.
   
-more...
 - Radar chart showing emotion metrics
 - Transcribed audio to text, and recommended phrases for the emotion detected/expressed
-- Intuitive GUI and beautiful gorgeous perfect frontend design
-(to be added)
 
 
 ## How it works
@@ -92,10 +87,9 @@ _(localhost:3000 by default)_
 
 
 ### Sneak Peak
-(add imgs from frontend here)
 
 ## Next Steps
-- [X] text
-- [ ] add firebase for accounts and database if needed???
+- [X] real-time updating radar chart
+- [ ] add firebase for accounts and database
 - [ ] deployment
-- [ ] we should add these to show scalability :)
+- [ ] demo video
