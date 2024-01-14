@@ -17,6 +17,13 @@ const Navbar = () => {
         <span className="pt-4 px-8">
       Github Devpost
       </span>
+      <Link to="/main">
+        <h1 className="">Github</h1>
+      </Link>        
+      <Link to="/main">
+        <h1 className="">Devpost</h1>
+      </Link>
+
       <ul className="flex p-4 px-8 rounded-full text-white bg-blue-700 font-semibold">
         <Link to="/main">
           <li className="">Try Now</li>
