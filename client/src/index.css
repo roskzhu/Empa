@@ -4,38 +4,18 @@
 
 
 @font-face {
-  font-family: 'Chillax';
-  src: url('../public/fonts/Chillax-Light.otf') format('otf');
-  font-weight: thin;
-  font-style: normal;
+  font-family: 'Satoshi';
+  src: url('../public/fonts/Satoshi-Bold.otf') format('otf'),
+       /* url('../public/fonts/Satoshi-Semibold.otf') format('otf'), */
+       url('../public/fonts/Satoshi-Medium.otf') format('otf'),
+       url('../public/fonts/Satoshi-Regular.otf') format('otf'),
+       url('../public/fonts/Satoshi-Light.otf') format('otf'),
+       /* url('../public/fonts/Satoshi-Extralight.otf') format('otf'); */
 }
-
-@font-face {
-  font-family: 'Chillax';
-  src: url('../public/fonts/Chillax-Regular.otf') format('otf');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Chillax';
-  src: url('../public/fonts/Chillax-Medium.otf') format('otf');
-  font-weight: medium;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Chillax';
-  src: url('../public/fonts/Chillax-Bold.otf') format('otf');
-  font-weight: bold;
-  font-style: normal;
-}
-
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Chillax', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Satoshi', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
@@ -46,28 +26,32 @@ code {
     monospace;
 }
 
-@import url('https://fonts.googleapis.com/css2?family= Chillax:wght@300;400;500;600;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 p {
-  font-family: ' Chillax', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 h1 {
-  font-family: ' Chillax', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 700;
   margin: 0;
 }
 
 h2 {
-  font-family: ' Chillax', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   margin: 0;
 }
 
 h3 {
-  font-family: ' Chillax', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 500;
 }
 
 a {
   text-decoration: none;
 }
+
+button {
+  font-family: 'Inter', sans-serif;
+} */
