@@ -274,7 +274,7 @@ function Main() {
   };
 
   const json_string_data = JSON.stringify(serverResponse, null, 2);
-  console.log('ser[0]: ', serverResponse.phrases);
+  // console.log('ser[0]: ', serverResponse.phrases);
 
   // State to manage the input message
   const [message, setMessage] = useState("");
@@ -344,8 +344,8 @@ function Main() {
         </div>
         
 
-        <div className="justify-end w-full right-0 relative ml-[950px] flex">
-        <div>
+        <div className="justify-end right-[-1050px] relative w-full flex">
+        <div className=" m-[15px]">
           <input
             type="text"
             value={message}
@@ -357,7 +357,7 @@ function Main() {
 
         </div>
         
-        <div className="flex">
+        <div className="flex  m-[15px]">
           <div className="transcription-container">
             <button onClick={startTranscription} disabled={isTranscribing} className="explore-button rounded-full">
               Start Transcription
@@ -375,15 +375,16 @@ function Main() {
                 <p>{transcript}</p>
               </div>
             )}
-            <h3 className="text-black max-w-[100px]">Suggested phrases:</h3>
+            <h3 className="text-black w-[230px] right-0 p-15">Suggested phrases:</h3>
             {serverResponse && (
               <div className="text-black">
                 {/* <pre>{JSON.stringify(serverResponse, null, 2)}</pre> */}
                 {/* <pre>{serverResponse && serverResponse[0]}</pre> */}
                 
-                {serverResponse.phrases.map((str, index) => (
-                  <div key={index}>{str}</div>
-                ))}
+                {serverResponse?.phrases && serverResponse.phrases.slice(0, 1).map((str, index) => (
+                  // <div key={index}>{str}</div>
+                  <div key={index}>{str.replace(/\d/g, '\n$&')}</div>
+                  ))}
               </div>
             )}
             {/* <h3>
