@@ -1,44 +1,34 @@
-import React, { useEffect, useRef } from 'react';
-import createEmotionRadarChart from './components/emotionRadar';
-import './components/emotionRadar.css';
-import CameraFeed from './components/CameraFeed.js';
-import './components/CameraFeed.css';
+import React, { useState } from 'react';
+import Main from './pages/Main';
+import Landing from './pages/Landing';
 
 const App = () => {
-  const canvasRef = useRef(null);
-  const chartRef = useRef(null);
+  const [currentPage, setCurrentPage] = useState('landing');
 
-  useEffect(() => {
-    // Dummy emotion data
-    const emotionData = [50, 30, 10, 7, 3, 0, 0];
+  const navigateToMain = () => {
+    setCurrentPage('main');
+  };
 
-    if (canvasRef.current) {
-      // Destroy the previous chart
-      if (chartRef.current) {
-        chartRef.current.destroy();
-      }
+  const navigateToLanding = () => {
+    setCurrentPage('landing');
+  };
 
-      // Create a new chart
-      chartRef.current = createEmotionRadarChart(canvasRef.current, emotionData);
-    }
-
-    // Cleanup function to destroy chart when component unmounts
-    return () => {
-      if (chartRef.current) {
-        chartRef.current.destroy();
-      }
-    };
-  }, []); // Add dependencies if needed
+  // Check the URL to determine the initial page
+  const path = window.location.pathname;
+  if (path === '/Main' && currentPage !== 'main') {
+    setCurrentPage('main');
+  }
 
   return (
-    <div className="main-container">
-      <CameraFeed />
-      <div className="emotion-radar-chart">
-        <canvas ref={canvasRef} className="emotion-radar-canvas"></canvas>
-      </div>
+    <div>
+      {currentPage === 'landing' && (
+        <Landing onNavigate={navigateToMain} />
+      )}
+      {currentPage === 'main' && (
+        <Main onNavigate={navigateToLanding} />
+      )}
     </div>
   );
-  
 };
 
 export default App;
