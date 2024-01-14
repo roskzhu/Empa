@@ -132,12 +132,12 @@ function Main() {
     }
   }, []);
 
-
-
-  // AUDIO TRANSCRIPTON
-
+  // Audio Transcription
   const [transcript, setTranscript] = useState('');
   const [isTranscribing, setIsTranscribing] = useState(false);
+
+  // Define a state variable to store the server response
+  const [serverResponse, setServerResponse] = useState(null);
 
   const startTranscription = () => {
     setIsTranscribing(true);
@@ -175,16 +175,23 @@ function Main() {
         },
         body: JSON.stringify({ transcript: speechToText }),
       })
-        .then((response) => {
-          if (response.ok) {
-            console.log('Transcript sent to the server successfully');
-          } else {
-            console.error('Failed to send transcript to the server');
-          }
-        })
-        .catch((error) => {
-          console.error('Error sending transcript:', error);
-        });
+      .then((response) => {
+        if (response.ok) {
+          return response.json(); // Assuming the server responds with JSON
+        } else {
+          console.error('Failed to send transcript to the server');
+        }
+      })
+      .then((data) => {
+        // Handle the data received from the server
+        console.log('Server Response:', data);
+
+        // Update the state with the server response
+        setServerResponse(data);
+      })
+      .catch((error) => {
+        console.error('Error sending transcript:', error);
+      });
     };
   };
 
@@ -235,6 +242,12 @@ function Main() {
           <div>
             <h3>Transcription:</h3>
             <p>{transcript}</p>
+          </div>
+        )}
+        {serverResponse && (
+          <div>
+            <h3>Suggested phrases:</h3>
+            <pre>{JSON.stringify(serverResponse, null, 2)}</pre>
           </div>
         )}
       </div>

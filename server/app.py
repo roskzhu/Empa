@@ -48,13 +48,14 @@ def generate_phrases_for_emotion(emotion):
 @app.route('/generate_phrases', methods=['POST'])
 def generate_phrases():
     text = request.json['transcript']
-    print(f"Transcript received: {text}")  # You can handle the transcript here as per your requirements
+    # print(f"Transcript received: {text}")  # You can handle the transcript here as per your requirements
 
     if text == "":
         return jsonify({'error': 'Missing "text" parameter'}), 400
 
     emotion = analyze_emotion(text)
     generated_phrases = generate_phrases_for_emotion(emotion)
+    print('generated_phrases: ', generated_phrases)
 
     return jsonify({'phrases': generated_phrases})
 
