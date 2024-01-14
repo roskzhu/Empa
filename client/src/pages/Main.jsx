@@ -37,84 +37,6 @@ function Main() {
       });
   };
 
-  // Audio Transcription 
-  // const [transcript, setTranscript] = useState('');
-
-  // useEffect(() => {
-  //   async function getMicrophoneAccess() {
-  //     try {
-  //       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  //       console.log('Microphone access successfully obtained:', stream);
-
-  //       let recognition;
-
-  //       if ('SpeechRecognition' in window) {
-  //         recognition = new window.SpeechRecognition();
-  //       } else if ('webkitSpeechRecognition' in window) {
-  //         recognition = new window.webkitSpeechRecognition();
-  //       } else {
-  //         console.error('Speech recognition not supported');
-  //         return;
-  //       }
-
-  //       recognition.lang = 'en-US';
-
-  //       recognition.start();
-  //       console.log('Ready to receive a command.');
-
-  //       recognition.onresult = function (event) {
-  //         console.log('Transcript:'); // Log the transcript to the console
-  //         const speechToText = event.results[0][0].transcript;
-  //         setTranscript(speechToText);
-  //         console.log("speeeeech: ", speechToText); // Log the transcript to the console
-
-  //         fetch('http://localhost:5000/receive_transcript', {
-  //           method: 'POST',
-  //           headers: {
-  //             'Content-Type': 'application/json',
-  //           },
-  //           body: JSON.stringify({ transcript: speechToText }),
-  //         })
-  //           .then((response) => {
-  //             if (response.ok) {
-  //               console.log('Transcript sent to the server successfully');
-  //             } else {
-  //               console.error('Failed to send transcript to the server');
-  //             }
-  //           })
-  //           .catch((error) => {
-  //             console.error('Error sending transcript:', error);
-  //           });
-  //       };
-  //     } catch (error) {
-  //       console.error('Error accessing microphone:', error);
-  //       // Handle any errors related to microphone access here
-  //     }
-  //   }
-  //   getMicrophoneAccess();
-  // }, []);
-
-
-  // ---- ver (2) ----
-  // const [audioFile, setAudioFile] = useState(null);
-  // const [transcription, setTranscription] = useState('');
-
-  // const handleFileChange = (event) => {
-  //   setAudioFile(event.target.files[0]);
-  // };
-
-  // const handleTranscription = async () => {
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append('audio', audioFile);
-
-  //     const response = await axios.post('http://localhost:5000/transcribe', formData);
-  //     setTranscription(response.data.transcription);
-  //   } catch (error) {
-  //     console.error('Error transcribing audio:', error);
-  //   }
-  // };
-
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (landmarkDataRef.current.length > 0) {
@@ -223,7 +145,6 @@ function Main() {
     console.log('Starting transcription');
 
     // Initialize speech recognition
-    // const recognition = new window.SpeechRecognition();
     let recognition;
     if ('SpeechRecognition' in window) {
       recognition = new window.SpeechRecognition();
@@ -234,7 +155,7 @@ function Main() {
       return;
     }
 
-    
+    console.log('recognition: ', recognition);    
 
     recognition.lang = 'en-US';
     recognition.start();
@@ -247,7 +168,7 @@ function Main() {
       console.log("Transcript:", speechToText);
 
       // Send the transcript to the server
-      fetch('http://localhost:5000/receive_transcript', {
+      fetch('http://localhost:5000/generate_phrases', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
