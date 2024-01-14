@@ -101,3 +101,13 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.hover-effect {
+  background-size: 200% 100%;
+  background-image: linear-gradient(45deg, #7ecfd5, #1841cc, #4f54ea);
+  transition: transform 0.3s ease-in-out;
+}
+
+.hover-effect:hover {
+  animation: slideRight 0.5s ease forwards;
+}
