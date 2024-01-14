@@ -277,6 +277,29 @@ function Main() {
     ],
   };
 
+  // State to manage the input message
+  const [message, setMessage] = useState("");
+
+  // Event handler for sending a message
+  const sendMessage = () => {
+    console.log("Message sent:", message);
+
+    // Call the generate_phrases endpoint with the message
+    axios
+    .post("http://localhost:5000/generate_phrases", {
+      transcript: message,
+    })
+    .then((response) => {
+      console.log("Message processed successfully");
+      // Update the server response with the returned data
+      setServerResponse(response.data);
+    })
+    .catch((error) => {
+      console.error("Error processing message:", error);
+    }); 
+    // Add your logic here to handle the message (e.g., send it to the server)
+  };
+
   return (
     <div
       className="Main"
@@ -319,6 +342,15 @@ function Main() {
         <button onClick={stopTranscription} disabled={!isTranscribing}>
           Stop Transcription
         </button>
+
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Type your message here"
+        />
+        <button onClick={sendMessage}>Send Message</button>
+
         {transcript && (
           <div>
             <h3>Transcription:</h3>
