@@ -15,7 +15,7 @@
     <br><br>
 </div>
 
-![image](https://github.com/roskzhu/Empa/assets/110139243/142b148c-90d0-47b3-a61f-06c0a06324fc)
+![image](https://github.com/roskzhu/Empa/assets/110139243/69dcafa4-f4e0-404b-be2d-c92247d32c6c)
 
 (insert demo video if possible here
 
