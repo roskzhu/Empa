@@ -1,0 +1,53 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .top-container {
+    display: flex;
+    flex: 1; /* Take up all available space */
+    margin-bottom: 20px; /* Spacing between the top and bottom sections */
+  }
+  
+  .webcam-container {
+    flex-basis: 60%; /* Allocate 60% width to webcam container */
+    max-height: calc(50vh - 20px); /* Adjust the height accordingly */
+  }
+  
+  .chart-container {
+    flex-basis: 100%; /* Allocate 40% width to chart container */
+    max-height: calc(50vh - 20px); /* Adjust the height accordingly */
+  }
+  
+  .webcam-container > webcam, .webcam-container > canvas,
+  .chart-container > canvas {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .bottom-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .transcription-container {
+    flex-basis: 50%; /* Allocate 50% width */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align buttons to the left */
+  }
+  
+  .suggestions-container {
+    flex-basis: 50%; /* Allocate 50% width */
+    /* Add styles for suggestions container */
+  }
+  
+  button {
+    margin-bottom: 10px; /* Spacing between buttons */
+  }
+  
+  
