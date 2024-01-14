@@ -54,7 +54,7 @@ more...
 
 
 ## Architecture Overview
-(to be added)
+![Empa drawio](https://github.com/roskzhu/Empa/assets/121539073/f486d9fd-99dc-4e8b-8646-67012babde21)
 
 
 ## Getting Started
