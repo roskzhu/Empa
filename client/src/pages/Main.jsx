@@ -13,8 +13,37 @@ import {
   FACEMESH_LIPS,
 } from "@mediapipe/face_mesh";
 import axios from "axios";
+import createEmotionRadarChart from '../components/emotionRadar';
+import '../components/emotionRadar.css';
 
 function Main() {
+  
+  // Emotion Radar Chart
+  const emotionCanvasRef = useRef(null);
+  const chartRef = useRef(null);
+
+  useEffect(() => {
+    // Dummy emotion data
+    const emotionData = [50, 30, 10, 7, 3, 0, 0];
+
+    if (emotionCanvasRef.current) {
+      // Destroy the previous chart
+      if (chartRef.current) {
+        chartRef.current.destroy();
+      }
+
+      // Create a new chart
+      chartRef.current = createEmotionRadarChart(emotionCanvasRef.current, emotionData);
+    }
+
+    // Cleanup function to destroy chart when component unmounts
+    return () => {
+      if (chartRef.current) {
+        chartRef.current.destroy();
+      }
+    };
+  }, []);
+  
   // Face Landmarking
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
@@ -202,7 +231,7 @@ function Main() {
   return (
     <center>
       <div className="Main">
-        {/* <Webcam
+        <Webcam
           ref={webcamRef}
           style={{
             position: "absolute",
@@ -215,7 +244,7 @@ function Main() {
             width: 640,
             height: 480,
           }}
-        />{" "}
+        />
         <canvas
           ref={canvasRef}
           className="output_canvas"
@@ -230,8 +259,12 @@ function Main() {
             width: 640,
             height: 480,
           }}
-        ></canvas> */}
-
+        ></canvas>
+  
+        <div className="emotion-radar-chart">
+          <canvas ref={emotionCanvasRef} className="emotion-radar-canvas"></canvas>
+        </div>
+  
         <button onClick={startTranscription} disabled={isTranscribing}>
           Start Transcription
         </button>
@@ -253,6 +286,7 @@ function Main() {
       </div>
     </center>
   );
+  
 }
 
 export default Main;
