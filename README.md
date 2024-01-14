@@ -15,9 +15,8 @@
     <br><br>
 </div>
 
+![image](https://github.com/roskzhu/Empa/assets/110139243/142b148c-90d0-47b3-a61f-06c0a06324fc)
 
-
-(insert cover img here)
 (insert demo video if possible here
 
 (insert a short description/hook here)
