@@ -21,12 +21,12 @@ const Landing = () => {
        {/* <div className='blurb'>
            <p className="text-black/60 text-3xl leading-relaxed font-medium pb-20 w-1/2">  */}
 
-        <h2 className="text-black/85 font-extrabold text-5xl w-[50%] py-4 leading-snug">
+        <h2 className="text-black/80 font-extrabold text-5xl w-[50%] py-4 leading-snug">
           Your Emotional Intelligence Partner.
         </h2>
 
         <div className="blurb">
-          <p className="text-black/70 text-xl leading-relaxed font-medium pb-10 w-1/2">
+          <p className="text-black/65 text-xl leading-relaxed font-medium pb-12 w-1/2">
             {/* Unlock the power of non-verbal communication with Empa – the cutting-edge tool designed to decode emotions in audio and video expressions.  */}
             Gain real-time insights into the unspoken language, receiving
             personalized feedback to enhance your communication skills in
