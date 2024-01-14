@@ -56,6 +56,10 @@
   background: linear-gradient(45deg, #FDFBF3, #E5F2F2, #AECAFB);
 }
 
+.pink-gradient {
+  background: linear-gradient(90deg, #F9E6ED, #FDFAEE, #FDFAEE);
+}
+
 .gradient-text {
   /* font-size: 70pt; */
   background: linear-gradient(45deg, #7ecfd5, #1841cc, #4f54ea);
