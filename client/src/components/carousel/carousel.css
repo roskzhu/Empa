@@ -1,8 +1,10 @@
 .hey {
   display: flex;
-  width: 98.2vw;
+  width: 100%; /* Adjusted to 100% for full-width alignment */
   justify-content: center;
+  gap: 20px; /* Adds spacing between the carousel cards */
 }
+
 
 
 .carousel-control {
@@ -27,3 +29,23 @@
   color: rgb(9, 9, 9);
   background-color: #d0d0d3;
 }
+
+.content {
+  color: #000; 
+  font-weight: bold;
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  align-items: flex-start; /* Align items vertically to the start */
+  justify-content: flex-start; 
+  transition: opacity 300ms;
+  font-size: 1.2em; /* Adjust the size to match your design */
+  text-align: left;
+  margin-bottom: 0.5em; /* Add space between content and answer */
+  
+}
+
+.answer {
+  color: #666; 
+}
+

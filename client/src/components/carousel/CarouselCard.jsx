@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import './carousel.css'; 
 
 const CarouselCard = ({card}) => {
   return (
@@ -7,7 +8,7 @@ const CarouselCard = ({card}) => {
       <div className="bg-blue-200">
         img here
       </div>
-      <p className='content'>{card.content}</p>
+      <p className='content m-0'>{card.content}</p>
       <p className='answer'>{card.answer}</p>
     </div>
   )
@@ -24,7 +25,8 @@ const CardContainer = styled.div`
   font-size: 35px;
   position: relative;
   padding: 40px;
-  align-items: center;
+  align-items: left;
+  
   .answer {
     grid-column: 1;
     grid-row: 1;
@@ -38,8 +40,12 @@ const CardContainer = styled.div`
   .content {
     grid-column: 1;
     grid-row: 1;
-    display: flex;
     transition: opacity 300ms;
+    font-size: 1.5em; /* Adjust the size to match your design */
+    font-weight: bold; /* Make the content bold */
+    text-align: left;
+    justify-content: left;
+    margin-bottom: 0.5em; /* Add space between content and answer */
   }
   :hover {
     .content {
