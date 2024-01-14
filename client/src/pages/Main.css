@@ -101,4 +101,85 @@
 
 button {
   margin-bottom: 10px; /* Spacing between buttons */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.emotion-radar-canvas {
+  width: 100%;
+  align-self: center;
+}
+
+.top-container {
+  display: flex;
+  flex: 1; /* Take up all available space */
+  margin-bottom: 20px; /* Spacing between the top and bottom sections */
+}
+
+.webcam-container {
+  width: 60%; /* Allocate 60% width to webcam container */
+  max-height: calc(50vh - 20px); /* Adjust the height accordingly */
+}
+
+.chart-container {
+  flex-basis: 100%; /* Allocate 40% width to chart container */
+  max-height: calc(50vh - 20px); /* Adjust the height accordingly */
+}
+
+.webcam-container > webcam,
+.webcam-container > canvas,
+.chart-container > canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.bottom-container {
+  display: flex;
+  justify-content: space-between;
+}
+.suggestion-container {
+  grid-column: span 3;
+  background-color: white;
+  font-size: 1em; /* Makes the text inside the buttons larger */
+  padding: 10px 20px; /* Adds padding inside the buttons for a larger clickable area */
+  border-radius: 20px; /* Rounds the corners of the buttons */
+  margin: 15px;
+  color: white;
+}
+
+.transcription-container {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Align buttons to the left */
+}
+
+.transcription-container button {
+  font-size: 1em; /* Makes the text inside the buttons larger */
+  padding: 10px 20px; /* Adds padding inside the buttons for a larger clickable area */
+  border-radius: 20px; /* Rounds the corners of the buttons */
+  background: linear-gradient(
+    45deg,
+    #7ecfd5,
+    #1841cc,
+    #4f54ea
+  ); /* Sets the background color of the button */
+  color: white; /* Sets the text color inside the button */
+  cursor: pointer; /* Changes the cursor to indicate the button is clickable */
+  scale: calc(1);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Change the button background color on hover and focus for visual feedback */
+.transcription-container button:hover,
+.transcription-container button:focus {
+  scale: calc(1.1);
+}
+
+button {
+  margin-bottom: 10px; /* Spacing between buttons */
 }

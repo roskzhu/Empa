@@ -18,6 +18,12 @@ import "../components/emotionRadar.css";
 import "./Main.css";
 
 function Main() {
+  const [showWebcam, setShowWebcam] = useState(true);
+
+  const handleToggle = () => {
+    setShowWebcam((prevShowWebcam) => !prevShowWebcam);
+  };
+
   // Emotion Radar Chart
   const emotionCanvasRef = useRef(null);
   const chartRef = useRef(null);
@@ -278,66 +284,69 @@ function Main() {
   };
 
   return (
-    <div
-      className="Main"
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-      }}
-    >
-      <div style={{ flex: 1 }}>
-        <Webcam
-          ref={webcamRef}
-          style={{
-            width: "100%",
-            height: "auto",
-          }}
-        />
-        <canvas
-          ref={canvasRef}
-          className="output_canvas"
-          style={{
-            width: "100%",
-            height: "auto",
-          }}
-        ></canvas>
-      </div>
-
-      <div className="emotion-radar-chart">
-        <canvas
-          ref={emotionCanvasRef}
-          className="emotion-radar-canvas"
-        ></canvas>
-      </div>
-
-      <div className="transcription-container">
-        <div className="button-container">
-          <button onClick={startTranscription} disabled={isTranscribing}>
-            Start Transcription
-          </button>
-          <button onClick={stopTranscription} disabled={!isTranscribing}>
-            Stop Transcription
-          </button>
-        </div>
-
-        {transcript && (
-          <div className="transcript">
-            <p>{transcript}</p>
+    <div className="background-gradient p-20 pt-30">
+      <div className="Main grid grid-cols-5 gap-4">
+        <div className="webcam-container flex col-span-3">
+          {showWebcam && (
+            <Webcam
+              ref={webcamRef}
+              style={{ width: "100%", borderRadius: "12px" }}
+            />
+          )}
+          <div style={{ flex: 1 }}>
+            <Webcam ref={webcamRef} style={{ width: "100%", height: "auto" }} />
+            <canvas
+              ref={canvasRef}
+              style={{
+                display: showWebcam ? "none" : "block",
+                width: "100%",
+              }}
+            />
+            <button
+              style={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                zIndex: 1,
+              }}
+              onClick={handleToggle}
+            >
+              toggle
+            </button>
           </div>
-        )}
-        {serverResponse && (
-          <div>
-            <h3>Suggested phrases:</h3>
-            <pre>{JSON.stringify(serverResponse, null, 2)}</pre>
-          </div>
-        )}
-        {/* {test && test.map((list, index) => (
-        <div key={index} >
-          <pre>{JSON.stringify(list, null, 2)}</pre>
         </div>
-      ))} */}
+        <div className="bg-white flex col-span-2 rounded-xl justify-center">
+          <div className="emotion-radar-chart">
+            <canvas
+              ref={emotionCanvasRef}
+              className="emotion-radar-canvas"
+            ></canvas>
+          </div>
+        </div>
+        <div className="grid grid-cols-4">
+          <div className="transcription-container">
+            <button onClick={startTranscription} disabled={isTranscribing}>
+              Start Transcription
+            </button>
+            <button onClick={stopTranscription} disabled={!isTranscribing}>
+              Stop Transcription
+            </button>
+          </div>
+          <div className="suggestion-container">
+            {transcript && (
+              <div>
+                <h3>Transcription:</h3>
+                <p>{transcript}</p>
+              </div>
+            )}
+            {serverResponse && (
+              <div>
+                <h3>Suggested phrases:</h3>
+                <pre>{JSON.stringify(serverResponse, null, 2)}</pre>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

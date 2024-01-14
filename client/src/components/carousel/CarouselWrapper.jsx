@@ -1,89 +1,91 @@
-import React, { useRef, useState, useEffect } from 'react';
-import axios from 'axios';
-
-import Swiper from 'react-slick';
-import './carousel.module.css';
+import React from 'react'
+import styled from '@emotion/styled';
+import Swiper from "react-slick";
+import './carousel.css';
 import CarouselCard from './CarouselCard';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
-import { Settings } from 'react-slick';
-
-// interface Metrics {
-//   _id: string;
-//   organization_Name: string;
-//   overnight_Service_Type: string;
-//   program_Model: string;
-//   service_User_Count: number;
-//   capacity_Actual_Room: number;
-// }
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 const Carousel = () => {
   const settings = {
     infinite: true,
-    speed: 300,
+    speed: 500,
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
+    autoplaySpeed: 2000,
     pauseOnHover: true,
-    className: 'test',
-    centerMode: false,
-    slidesToShow: 3,
-
-    responsive: [
-      {
-        breakpoint: 1024, // md and above
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 768, // sm
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
+    className: "hey"
   };
 
-  const slider = useRef<Swiper | null>(null);
-
-  const [metrics, setMetrics] = useState([]);
-
-  useEffect(() => {
-    // Fetch data from your API endpoint
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/api/metrics');
-        console.log(response.data);
-        setMetrics(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error.message);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const slider = React.useRef(null);
 
   return (
-    <>
-      <div className="flex flex-col mt-[40px]">
-        <Swiper ref={slider} {...settings}>
-          {metrics.map((card, index) => (
-            <CarouselCard card={card} key={index} />
-          ))}
-        </Swiper>
+    // <CarouselContainer>
+    <div className="pt-20 justify-center">
+      <Swiper ref={slider} {...settings}>
+        {cards.map((card, index) => (
+          <CarouselCard
+            card={card} 
+            key={index}
+          />
+        ))}
+      </Swiper>
 
-        <div className="flex justify-center mt-4">
-          <button className="carousel-control" onClick={() => slider.current?.slickPrev()}>
-            <IoIosArrowBack style={{ color: 'white', marginRight: '25px' }} />
-          </button>
-          <button className="carousel-control" onClick={() => slider.current?.slickNext()}>
-            <IoIosArrowForward style={{ color: 'white' }} />
-          </button>
-        </div>
-      </div>
-    </>
-  );
-};
+      <CarouselControlContainer>
+        <button 
+          className="carousel-control" 
+          onClick={() => slider?.current?.slickPrev()}
+        >
+          <IoIosArrowBack/>
+        </button>
+        <button 
+          className="carousel-control" 
+          onClick={() => slider?.current?.slickNext()}
+        >
+          <IoIosArrowForward/>
+        </button>
 
-export default Carousel;
+      </CarouselControlContainer>
+      
+    {/* </CarouselContainer> */}
+    </div>
+  )
+}
+
+const CarouselContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+  margin-top: -40px;
+`
+
+const CarouselControlContainer = styled.div`
+  align-self: center;
+  display: flex;
+`
+
+const cards = [
+  {
+    content: "Social Interaction Aid",
+    answer: "text"
+  },
+  {
+    content: "text",
+    answer: "of course"
+  },
+  {
+    content: "text",
+    answer: "definitely"
+  },
+  {
+    content: "text",
+    answer: "for sure"
+  },
+  {
+    content: "text",
+    answer: "on god"
+  },
+]
+export default Carousel
