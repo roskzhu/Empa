@@ -1,10 +1,10 @@
 <div align="center">
     <div id="user-content-toc">
       <ul>
-          <summary><h1 style="display: inline-block; margin-bottom:0px">Empa</h1></summary>
+          <summary><h1 style="display: inline-block; margin-bottom:0px; font-size:60pt;">Empa</h1></summary>
       </ul>
     </div>
-    <h3>description</h3>
+    <h3>Your Emotional Intelligence Partner</h3>
 <!--     <h4><i>xxx</i></h4> -->
    <br>
     <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"/>
