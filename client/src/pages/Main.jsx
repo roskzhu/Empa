@@ -22,8 +22,6 @@ function Main() {
   const emotionCanvasRef = useRef(null);
   const chartRef = useRef(null);
 
-  const [emotionData, setEmotionData] = useState([0, 0, 0, 0, 0, 0, 0]);
-
   useEffect(() => {
     // Dummy emotion data
     const emotionData = [50, 30, 10, 7, 3, 0, 0];
