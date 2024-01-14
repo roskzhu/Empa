@@ -1,0 +1,29 @@
+.test {
+  display: flex;
+  width: 98.2vw;
+  justify-content: center;
+}
+
+
+.carousel-control {
+  width: 55px;
+  height: 55px;
+  background-color: #E2E2E5;
+  color: #636365;
+  font-size: 20px;
+  border-radius: 27.5px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  transition: border-color 500ms, background-color 500ms;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-control:hover {
+  cursor: pointer;
+  color: rgb(9, 9, 9);
+  background-color: #d0d0d3;
+}
+
