@@ -5,6 +5,7 @@ import os
 import openai
 import speech_recognition as sr
 import transcribe
+import pickle
 
 app = Flask(__name__)
 CORS(app)
@@ -59,11 +60,31 @@ def generate_phrases():
     return jsonify({'phrases': generated_phrases})
 
 # Endpoint to receive facial landmarking data from client
+# Load your model
+with open('empa_model5.pkl', 'rb') as file:
+    model = pickle.load(file)
+
 @app.route('/receive_data', methods=['POST'])
 def receive_data():
     data = request.json
     print(data)  # This will print the data to the console
-    return jsonify({'message': 'Data received successfully!'})
+    
+    # Convert data to the appropriate format for your model
+    # This step depends on how your model expects the input
+    # For example, if your model expects a Pandas DataFrame:
+    import pandas as pd
+    df = pd.DataFrame([data])
+
+    # Predict probabilities
+    probabilities = model.predict_proba(df)
+
+    # Convert probabilities to a format that can be sent as JSON
+    # Example: converting NumPy array to a list
+    probabilities_list = probabilities.tolist()
+
+    # Return the probabilities in the response
+    return jsonify({'message': 'Data received successfully!', 'probabilities': probabilities_list})
+
     
 
 if __name__ == '__main__':
