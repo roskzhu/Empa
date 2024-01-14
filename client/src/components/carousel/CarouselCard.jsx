@@ -4,8 +4,8 @@ import './carousel.css';
 
 const CarouselCard = ({card}) => {
   return (
-    <div className="m-2 border-rounded">
-      <div className="bg-blue-200">
+    <div className="m-1 rounded-xl hover:bg-black/10 p-5 min-h-[440px]">
+      <div className="reverse-gradient h-[170px]">
         img here
       </div>
       <p className='text-3xl font-extrabold my-10 text-black/80'>{card.content}</p>

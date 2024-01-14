@@ -22,7 +22,6 @@ const Carousel = () => {
   const slider = React.useRef(null);
 
   return (
-    // <CarouselContainer>
     <div className="pt-20 justify-center">
       <Swiper ref={slider} {...settings}>
         {cards.map((card, index) => (
@@ -33,7 +32,7 @@ const Carousel = () => {
         ))}
       </Swiper>
 
-      <CarouselControlContainer>
+      <div className="flex justify-center">
         <button 
           className="carousel-control" 
           onClick={() => slider?.current?.slickPrev()}
@@ -47,24 +46,10 @@ const Carousel = () => {
           <IoIosArrowForward/>
         </button>
 
-      </CarouselControlContainer>
-      
-    {/* </CarouselContainer> */}
+      </div>
     </div>
   )
 }
-
-const CarouselContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 20px;
-  margin-top: -40px;
-`
-
-const CarouselControlContainer = styled.div`
-  align-self: center;
-  display: flex;
-`
 
 const cards = [
   {
