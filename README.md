@@ -34,6 +34,7 @@ Empa, a tool that leverages computer vision and machine learning to analyze faci
 - Caregiver Assistance Tool - Supports caregivers in understanding and responding to the emotional needs of individuals with severe communication disabilities.
 - Relationship Building for Neurodiverse Couples - Helps partners where one or both individuals have difficulties with emotion recognition to better understand each other's feelings.
 - Accessible Mental Health Monitoring - Assists in monitoring and understanding emotional changes in individuals with mental health conditions that affect emotional expression or recognition.
+  
 more...
 - Radar chart showing emotion metrics
 - Transcribed audio to text, and recommended phrases for the emotion detected/expressed
