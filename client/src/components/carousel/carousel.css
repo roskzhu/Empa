@@ -1,4 +1,4 @@
-.test {
+.hey {
   display: flex;
   width: 98.2vw;
   justify-content: center;
@@ -11,6 +11,7 @@
   background-color: #E2E2E5;
   color: #636365;
   font-size: 20px;
+  margin: 10px;
   border-radius: 27.5px;
   margin-top: 40px;
   margin-bottom: 40px;
@@ -26,4 +27,3 @@
   color: rgb(9, 9, 9);
   background-color: #d0d0d3;
 }
-
