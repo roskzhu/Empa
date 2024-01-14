@@ -285,17 +285,17 @@ function Main() {
 
     // Call the generate_phrases endpoint with the message
     axios
-    .post("http://localhost:5000/generate_phrases", {
-      transcript: message,
-    })
-    .then((response) => {
-      console.log("Message processed successfully", response.data);
-      // Update the server response with the returned data
-      setServerResponse(response.data);
-    })
-    .catch((error) => {
-      console.error("Error processing message:", error);
-    }); 
+      .post("http://localhost:5000/generate_phrases", {
+        transcript: message,
+      })
+      .then((response) => {
+        console.log("Message processed successfully", response.data);
+        // Update the server response with the returned data
+        setServerResponse(response.data);
+      })
+      .catch((error) => {
+        console.error("Error processing message:", error);
+      });
     // Add your logic here to handle the message (e.g., send it to the server)
   };
 
@@ -320,7 +320,6 @@ function Main() {
               }}
             />
 
-
             {/* <button
               style={{
                 position: "absolute",
@@ -342,58 +341,69 @@ function Main() {
             ></canvas>
           </div>
         </div>
-        
 
-        <div className="justify-end right-[-1050px] relative w-full flex">
-        <div className=" m-[15px]">
-          <input
-            type="text"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="Type your message here"
-            className="h-[120px] p-10 rounded-3xl"
-          />
-          <button onClick={sendMessage} className="explore-button rounded-full mt-4">Send Message</button>
-
-        </div>
-        
-        <div className="flex  m-[15px]">
-          <div className="transcription-container">
-            <button onClick={startTranscription} disabled={isTranscribing} className="explore-button rounded-full">
-              Start Transcription
-            </button>
-            <button onClick={stopTranscription} disabled={!isTranscribing} className="explore-button rounded-full">
-              Stop Transcription
+        <div className="justify-end w-full right-0 relative ml-[950px] flex">
+          <div>
+            <input
+              type="text"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Type your message here"
+              className="h-[120px] p-8 rounded-3xl"
+            />
+            <button
+              onClick={sendMessage}
+              className="explore-button rounded-full mt-4"
+            >
+              Send Message
             </button>
           </div>
 
+          <div className="flex">
+            <div className="transcription-container">
+              <div className="flex gap-4">
+                <button
+                  onClick={startTranscription}
+                  disabled={isTranscribing}
+                  className="explore-button rounded-full"
+                >
+                  Start Transcription
+                </button>
+                <button
+                  onClick={stopTranscription}
+                  disabled={!isTranscribing}
+                  className="explore-button rounded-full"
+                >
+                  Stop Transcription
+                </button>
+              </div>
+              {transcript && (
+                <div className="text-black">
+                  <h3 className="text-black">Transcription:</h3>
+                  <p>{transcript}</p>
+                </div>
+              )}
+            </div>
 
-          <div className="suggestion-container text-black">
-          {transcript && (
-              <div>
-                <h3>Transcription:</h3>
-                <p>{transcript}</p>
-              </div>
-            )}
-            <h3 className="text-black w-[230px] right-0 p-15">Suggested phrases:</h3>
-            {serverResponse && (
-              <div className="text-black">
-                {/* <pre>{JSON.stringify(serverResponse, null, 2)}</pre> */}
-                {/* <pre>{serverResponse && serverResponse[0]}</pre> */}
-                
-                {serverResponse?.phrases && serverResponse.phrases.slice(0, 1).map((str, index) => (
-                  // <div key={index}>{str}</div>
-                  <div key={index}>{str.replace(/\d/g, '\n$&')}</div>
+            <div className="suggestion-container text-black">
+              <h3 className="text-black max-w-[200px]">Suggested phrases:</h3>
+              {serverResponse && (
+                <div className="text-black">
+                  {/* <pre>{JSON.stringify(serverResponse, null, 2)}</pre> */}
+                  {/* <pre>{serverResponse && serverResponse[0]}</pre> */}
+
+                  {serverResponse.phrases.map((str, index) => (
+                    <div key={index}>{str}</div>
                   ))}
-              </div>
-            )}
-            {/* <h3>
+                </div>
+              )}
+              {/* <h3>
               {test}
             </h3> */}
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }
