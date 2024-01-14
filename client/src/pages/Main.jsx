@@ -72,7 +72,7 @@ function Main() {
               chartRef.current.destroy();
               console.log("chartRef.current:", chartRef.current);
             }
-      
+
             // Create a new chart
             chartRef.current = createEmotionRadarChart(
               emotionCanvasRef.current,
@@ -81,9 +81,10 @@ function Main() {
             console.log("emotionCanvasRef.current:", emotionCanvasRef.current);
           }
         } else {
-          console.error("Received undefined or invalid probabilities from the server.");
+          console.error(
+            "Received undefined or invalid probabilities from the server."
+          );
         }
-
       })
       .catch((error) => {
         console.error("Error sending data:", error);
@@ -103,7 +104,6 @@ function Main() {
       probabilities
     );
   }
-
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -313,15 +313,17 @@ function Main() {
       </div>
 
       <div className="transcription-container">
-        <button onClick={startTranscription} disabled={isTranscribing}>
-          Start Transcription
-        </button>
-        <button onClick={stopTranscription} disabled={!isTranscribing}>
-          Stop Transcription
-        </button>
+        <div className="button-container">
+          <button onClick={startTranscription} disabled={isTranscribing}>
+            Start Transcription
+          </button>
+          <button onClick={stopTranscription} disabled={!isTranscribing}>
+            Stop Transcription
+          </button>
+        </div>
+
         {transcript && (
-          <div>
-            <h3>Transcription:</h3>
+          <div className="transcript">
             <p>{transcript}</p>
           </div>
         )}
