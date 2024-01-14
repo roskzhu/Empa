@@ -21,8 +21,7 @@
 
 (insert demo video if possible here
 
-(insert a short description/hook here)
-
+Empa, a tool that leverages computer vision and machine learning to analyze facial expressions and translate them into recognizable emotions. It's designed to assist individuals with communication disorders in social interactions, help those on the autism spectrum in understanding emotional cues, and enhance empathy in diverse, cross-cultural communications.
 
 ## Features
 - Radar chart showing emotion metrics
