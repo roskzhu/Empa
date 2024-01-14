@@ -346,32 +346,38 @@ function Main() {
             ></canvas>
           </div>
         </div>
-        <div className="grid grid-cols-4">
-          <div className="transcription-container">
-            <button onClick={startTranscription} disabled={isTranscribing}>
-              Start Transcription
-            </button>
-            <button onClick={stopTranscription} disabled={!isTranscribing}>
-              Stop Transcription
-            </button>
-          </div>
-          <div className="suggestion-container">
-
+        
+        <div>
           <input
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Type your message here"
           />
-          <button onClick={sendMessage}>Send Message</button>
-            {transcript && (
+          <button onClick={sendMessage} className="explore-button rounded-full">Send Message</button>
+
+        </div>
+        
+        <div className="flex">
+          <div className="transcription-container">
+            <button onClick={startTranscription} disabled={isTranscribing} className="explore-button rounded-full">
+              Start Transcription
+            </button>
+            <button onClick={stopTranscription} disabled={!isTranscribing} className="explore-button rounded-full">
+              Stop Transcription
+            </button>
+          </div>
+
+
+          <div className="suggestion-container text-black">
+          {transcript && (
               <div>
                 <h3>Transcription:</h3>
                 <p>{transcript}</p>
               </div>
             )}
             {serverResponse && (
-              <div>
+              <div className="text-black">
                 <h3>Suggested phrases:</h3>
                 <pre>{JSON.stringify(serverResponse, null, 2)}</pre>
               </div>
