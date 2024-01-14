@@ -18,7 +18,7 @@ import "../components/emotionRadar.css";
 import "./Main.css";
 
 function Main() {
-  const [showWebcam, setShowWebcam] = useState(true);
+  const [showWebcam, setShowWebcam] = useState(false);
 
   const handleToggle = () => {
     setShowWebcam((prevShowWebcam) => !prevShowWebcam);
@@ -273,15 +273,8 @@ function Main() {
     setIsTranscribing(false);
   };
 
-  const test = {
-    phrases: [
-      "1. That's fantastic! \n2. I'm so happy for you! \n3. It's so great to see you smiling! \n4. Yay, that's amazing news! \n5. Your positivity is infectious. \n6. I'm overjoyed for you! \n7. This is definitely a reason to celebrate. \n8. You deserve all the happiness and more. \n9. I can't help but feel happy when you're so joyful. \n10. Your positivity is radiating and it's contagious.",
-      '1. "That\'s amazing, I\'m so happy for you!" \n2. "Wow, that must feel incredible!" \n3. "Congratulations, you deserve all the happiness in the world!" \n4. "I can feel your excitement, it\'s contagious!" \n5. "I\'m thrilled to hear that, it\'s wonderful news!" \n6. "What a wonderful reason to celebrate!" \n7. "I\'m so happy to see you so joyful!" \n8. "Your happiness is contagious, it\'s impossible not to feel it too!" \n9. "This is such a great moment, let\'s soak it all in!" \n10. "You have every reason to be overjoyed, way to go!"',
-      '1. "That\'s amazing, you deserve to feel so joyful right now!" \n2. "I\'m so happy for you, this is such a positive moment!" \n3. "Your positivity is infectious, I can\'t help but smile too!" \n4. "I can see the joy radiating from you, it\'s contagious!" \n5. "This is a great reason to celebrate, let\'s do something to keep the positive vibes going!" \n6. "You have every reason to feel positive, you\'ve worked so hard for this moment!" \n7. "You\'re glowing with happiness, and it\'s a beautiful sight!" \n8. "I\'m thrilled to see you in such a positive state, it\'s uplifting',
-      "1. That's fantastic news! \n2. I'm so happy for you! \n3. Congratulations, you deserve it! \n4. Your energy is contagious. \n5. It's wonderful to see you so full of joy. \n6. Keep spreading that happiness. \n7. I can't help but smile when I see you so happy. \n8. This calls for a celebration! \n9. You are glowing with positive energy. \n10. Your positive attitude can light up a room. \n11. It's a pleasure to be around you when you're so joyful. \n12. What's making your heart so full? \n13. I'm here to share in your happiness. \n14. Your positivity is",
-      '1. "I am so happy to see you feeling so positive!"\n2. "Your positivity is contagious, thank you for spreading joy!"\n3. "What\'s making you feel so joyful today?"\n4. "Your smile is radiating happiness, I love it!"\n5. "Keep riding this wave of positivity, it suits you well."\n6. "I\'m glad to see you\'re in such a great mood."\n7. "Your positive energy is lighting up the room!"\n8. "You deserve all the happiness and joy in the world."\n9. "I am grateful to have such a positive person in my life."\n10. "Your positive outlook on life is truly inspiring."\n11. "Wishing you endless moments of joy',
-    ],
-  };
+  const json_string_data = JSON.stringify(serverResponse, null, 2);
+  console.log('ser[0]: ', serverResponse.phrases);
 
   // State to manage the input message
   const [message, setMessage] = useState("");
@@ -296,7 +289,7 @@ function Main() {
       transcript: message,
     })
     .then((response) => {
-      console.log("Message processed successfully");
+      console.log("Message processed successfully", response.data);
       // Update the server response with the returned data
       setServerResponse(response.data);
     })
@@ -307,7 +300,7 @@ function Main() {
   };
 
   return (
-    <div className="background-gradient p-20 pt-30">
+    <div className="background-gradient p-20 pt-[110px]">
       <div className="Main grid grid-cols-5 gap-4">
         <div className="webcam-container flex col-span-3">
           {showWebcam && (
@@ -318,6 +311,7 @@ function Main() {
           )}
           <div style={{ flex: 1 }}>
             <Webcam ref={webcamRef} style={{ width: "100%", height: "auto" }} />
+
             <canvas
               ref={canvasRef}
               style={{
@@ -325,7 +319,9 @@ function Main() {
                 width: "100%",
               }}
             />
-            <button
+
+
+            {/* <button
               style={{
                 position: "absolute",
                 bottom: 0,
@@ -335,7 +331,7 @@ function Main() {
               onClick={handleToggle}
             >
               toggle
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="bg-white flex col-span-2 rounded-xl justify-center">
@@ -347,14 +343,17 @@ function Main() {
           </div>
         </div>
         
+
+        <div className="justify-end w-full right-0 relative ml-[950px] flex">
         <div>
           <input
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Type your message here"
+            className="h-[120px] p-10 rounded-3xl"
           />
-          <button onClick={sendMessage} className="explore-button rounded-full">Send Message</button>
+          <button onClick={sendMessage} className="explore-button rounded-full mt-4">Send Message</button>
 
         </div>
         
@@ -376,15 +375,24 @@ function Main() {
                 <p>{transcript}</p>
               </div>
             )}
+            <h3 className="text-black max-w-[100px]">Suggested phrases:</h3>
             {serverResponse && (
               <div className="text-black">
-                <h3>Suggested phrases:</h3>
-                <pre>{JSON.stringify(serverResponse, null, 2)}</pre>
+                {/* <pre>{JSON.stringify(serverResponse, null, 2)}</pre> */}
+                {/* <pre>{serverResponse && serverResponse[0]}</pre> */}
+                
+                {serverResponse.phrases.map((str, index) => (
+                  <div key={index}>{str}</div>
+                ))}
               </div>
             )}
+            {/* <h3>
+              {test}
+            </h3> */}
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
