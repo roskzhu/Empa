@@ -6,7 +6,12 @@
     padding: 20px;
     box-sizing: border-box;
   }
-  
+
+  .emotion-radar-canvas {
+    width: 100%;
+    align-self: center;
+  }
+
   .top-container {
     display: flex;
     flex: 1; /* Take up all available space */
@@ -14,7 +19,7 @@
   }
   
   .webcam-container {
-    flex-basis: 60%; /* Allocate 60% width to webcam container */
+    width: 60%; /* Allocate 60% width to webcam container */
     max-height: calc(50vh - 20px); /* Adjust the height accordingly */
   }
   
@@ -33,44 +38,40 @@
     display: flex;
     justify-content: space-between;
   }
-  
+  .suggestion-container {
+    grid-column: span 3;
+    background-color: white;
+    font-size: 1em; /* Makes the text inside the buttons larger */
+    padding: 10px 20px; /* Adds padding inside the buttons for a larger clickable area */
+    border-radius: 20px; /* Rounds the corners of the buttons */
+    margin: 15px;
+    color: white;
+  }
+
   .transcription-container {
-    flex-basis: 50%; /* Allocate 50% width */
+    padding: 15px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Align buttons to the left */
+    align-items: center; /* Align buttons to the left */
   }
 
   .transcription-container button {
     font-size: 1em; /* Makes the text inside the buttons larger */
     padding: 10px 20px; /* Adds padding inside the buttons for a larger clickable area */
-    margin: 0 0 20px 0; /* Adds margin to the bottom of each button */
-    border: 1px solid #30abed; /* Adds a border to the button, you can choose any color */
-    border-radius: 5px; /* Rounds the corners of the buttons */
-    background: linear-gradient(45deg, #7ecfd5, #4f54ea); /* Sets the background color of the button */
+    border-radius: 20px; /* Rounds the corners of the buttons */
+    background: linear-gradient(45deg, #7ecfd5, #1841cc, #4f54ea); /* Sets the background color of the button */
     color: white; /* Sets the text color inside the button */
     cursor: pointer; /* Changes the cursor to indicate the button is clickable */
-    transition: background-color 0.3s; /* Adds a transition effect when hovering or focusing */
+    scale:calc(1);
+    transition: transform 0.3s ease-in-out;
   }
+
 /* Change the button background color on hover and focus for visual feedback */
 .transcription-container button:hover,
 .transcription-container button:focus {
-  background-color: #0056b3;
+  scale:calc(1.1);
 }
 
-/* If you have specific classes or IDs for your buttons, use them for more precise targeting */
-.transcription-container .start-button {
-  /* Additional styles for the start button */
-}
-
-.transcription-container .stop-button {
-  /* Additional styles for the stop button */
-}
-  .suggestions-container {
-    flex-basis: 50%; /* Allocate 50% width */
-    /* Add styles for suggestions container */
-  }
-  
   button {
     margin-bottom: 10px; /* Spacing between buttons */
   }
