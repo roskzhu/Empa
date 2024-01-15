@@ -5,7 +5,7 @@
       </ul>
     </div>
     <h3>Your Emotional Intelligence Partner</h3>
-<!--     <h4><i>xxx</i></h4> -->
+    <h4><i>🏅 1st Place SheHacks Winner</i></h4>
    <br>
     <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54"/>
     <img src="https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white"/>
