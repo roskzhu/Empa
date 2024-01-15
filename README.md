@@ -19,21 +19,15 @@
 
 ![image](https://github.com/roskzhu/Empa/assets/110139243/69dcafa4-f4e0-404b-be2d-c92247d32c6c)
 
-Empa, a tool that leverages computer vision and machine learning to analyze facial expressions and translate them into recognizable emotions. It's designed to assist individuals with communication disorders in social interactions, help those on the autism spectrum in understanding emotional cues, and enhance empathy in diverse, cross-cultural communications.
+Empa is a tool that leverages computer vision and machine learning to analyze facial expressions and translate them into recognizable emotions. It's designed to assist individuals with communication disorders in social interactions, help those on the autism spectrum understand emotional cues, and enhance empathy in diverse, cross-cultural communications.
 
 ## Features
-- **Social Interaction Aid**, - Assists individuals with social communication disorders in interpreting and responding to others' emotions effectively.
-- **Autism Support Tool** - Helps those on the autism spectrum who struggle with reading facial expressions to better understand social cues.
-- **Emotional Education for Children** - Aids in teaching children, especially those with developmental challenges, about emotions and facial expressions.
-- **Cross-Cultural Communication** - Assists in bridging gaps in emotional expression understanding across different cultures, enhancing empathy in diverse environments.
-- **Virtual Learning Companion** - Integrates with online learning platforms to help students with emotional and social learning difficulties.
-- **Relationship Building for Neurodiverse Couples** - Helps partners where one or both individuals have difficulties with emotion recognition to better understand each other's feelings.
-  
-- Radar chart showing emotion metrics
-- Transcribed audio to text, and recommended phrases for the emotion detected/expressed
+- Real-time emotion recognition from live facial facial footage using our custom-trained model.
+- Radar chart showing emotion metrics (Measured with the confidence level of each emotion).
+- Recommended responses from the detected emotion using transcribed audio to text (i.e. if you say a phrase expressing anger, the app shows ways you can say to soothe that person).
 
 
-## How it works
+## Built with
 - Flask backend
 - Vanilla React frontend
 
@@ -87,6 +81,8 @@ _(localhost:3000 by default)_
 
 
 ### Sneak Peak
+![image](https://github.com/roskzhu/Empa/assets/110139243/6abaec4c-3acb-4fe6-b937-90f18bde2050)
+
 
 ## Next Steps
 - [X] real-time updating radar chart
