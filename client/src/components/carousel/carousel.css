@@ -1,0 +1,55 @@
+.hey {
+  display: flex;
+  width: 100%; /* Adjusted to 100% for full-width alignment */
+  justify-content: center;
+  gap: 20px; /* Adds spacing between the carousel cards */
+}
+
+
+
+.carousel-control {
+  width: 55px;
+  height: 55px;
+  color: #636365;
+  font-size: 20px;
+  margin: 10px;
+  border-radius: 27.5px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  transition: border-color 500ms, background-color 500ms;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-control:hover {
+  cursor: pointer;
+  color: rgb(9, 9, 9);
+  background-color: #d0d0d3;
+}
+
+.content {
+  color: #000; 
+  font-weight: bold;
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  align-items: flex-start; /* Align items vertically to the start */
+  justify-content: flex-start; 
+  transition: opacity 300ms;
+  font-size: 1.2em; /* Adjust the size to match your design */
+  text-align: left;
+  margin-bottom: 0.5em; /* Add space between content and answer */
+  
+}
+
+.answer {
+  color: #666; 
+}
+
+image {
+  width: 20%;
+  margin: 40%;
+  padding-top: 40px;
+}
