@@ -22,9 +22,9 @@
 Empa is a tool that leverages computer vision and machine learning to analyze facial expressions and translate them into recognizable emotions. It's designed to assist individuals with communication disorders in social interactions, help those on the autism spectrum understand emotional cues, and enhance empathy in diverse, cross-cultural communications.
 
 ## Features
-- Real-time emotion recognition from live facial facial footage using our custom-trained model.
-- Radar chart showing emotion metrics (Measured with the confidence level of each emotion).
-- Recommended responses from the detected emotion using transcribed audio to text (i.e. if you say a phrase expressing anger, the app shows ways you can say to soothe that person).
+- **Real-time emotion recognition** from **live facial facial footage** using our _custom-trained_ model.
+- **Radar chart** showing emotion metrics (Measured with the confidence level of each emotion).
+- Recommended responses from the detected emotion using **transcribed audio to text** (i.e. if you say a phrase expressing anger, the app shows ways you can say to soothe that person).
 
 
 ## Built with
