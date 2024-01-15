@@ -29,8 +29,9 @@ Empa is a tool that leverages computer vision and machine learning to analyze fa
 
 ## Built with
 - Flask backend
-- Vanilla React frontend
-
+- Python + Jupyter notebook to train the model
+- Vanilla React frontend styled with Tailwind CSS
+  
 ### How we trained the model
 - `landmarking.ipynb` -> Downloaded FER2013 dataset (imgs), and used Mediapipe to landmark 463 facial points, writing this to a CSV (`fer2013_landmarks_nopathsfixed.csv`)
 - x is the emotion (label) for the image
