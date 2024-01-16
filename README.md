@@ -86,7 +86,8 @@ _(localhost:3000 by default)_
 
 
 ## Next Steps
-- [X] real-time updating radar chart
-- [ ] add firebase for accounts and database
-- [ ] deployment
-- [ ] demo video
+- [X] Radar chart updating live on real-time footage
+- [ ] Adding detection for emotions detected in vocal tone & body language for improved conversation suggestions
+- [ ] Adding accounts and database?
+- [ ] Deployment
+- [ ] Demo Video
