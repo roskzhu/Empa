@@ -5,7 +5,7 @@
       </ul>
     </div>
     <h3>Your Emotional Intelligence Partner</h3>
-<!--     <h4><i>xxx</i></h4> -->
+    <h4><i>🏅 1st Place SheHacks Winner</i></h4>
    <br>
     <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54"/>
     <img src="https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white"/>
@@ -19,24 +19,19 @@
 
 ![image](https://github.com/roskzhu/Empa/assets/110139243/69dcafa4-f4e0-404b-be2d-c92247d32c6c)
 
-Empa, a tool that leverages computer vision and machine learning to analyze facial expressions and translate them into recognizable emotions. It's designed to assist individuals with communication disorders in social interactions, help those on the autism spectrum in understanding emotional cues, and enhance empathy in diverse, cross-cultural communications.
+Empa is a full-stack web application that leverages computer vision and machine learning to analyze facial expressions and translate them into recognizable emotions. It's designed to assist individuals with communication disorders in social interactions, help those on the autism spectrum understand emotional cues, and enhance empathy in diverse, cross-cultural communications.
 
 ## Features
-- **Social Interaction Aid**, - Assists individuals with social communication disorders in interpreting and responding to others' emotions effectively.
-- **Autism Support Tool** - Helps those on the autism spectrum who struggle with reading facial expressions to better understand social cues.
-- **Emotional Education for Children** - Aids in teaching children, especially those with developmental challenges, about emotions and facial expressions.
-- **Cross-Cultural Communication** - Assists in bridging gaps in emotional expression understanding across different cultures, enhancing empathy in diverse environments.
-- **Virtual Learning Companion** - Integrates with online learning platforms to help students with emotional and social learning difficulties.
-- **Relationship Building for Neurodiverse Couples** - Helps partners where one or both individuals have difficulties with emotion recognition to better understand each other's feelings.
-  
-- Radar chart showing emotion metrics
-- Transcribed audio to text, and recommended phrases for the emotion detected/expressed
+- **Real-time emotion recognition** from **live facial facial footage** using our _custom-trained_ model.
+- **Radar chart** showing emotion metrics (Measured with the confidence level of each emotion).
+- Recommended responses from the detected emotion using **transcribed audio to text** (i.e. if you say a phrase expressing anger, the app shows ways you can say to soothe that person).
 
 
-## How it works
+## Built with
 - Flask backend
-- Vanilla React frontend
-
+- Python + Jupyter notebook to train the model
+- Vanilla React frontend styled with Tailwind CSS
+  
 ### How we trained the model
 - `landmarking.ipynb` -> Downloaded FER2013 dataset (imgs), and used Mediapipe to landmark 463 facial points, writing this to a CSV (`fer2013_landmarks_nopathsfixed.csv`)
 - x is the emotion (label) for the image
@@ -87,9 +82,12 @@ _(localhost:3000 by default)_
 
 
 ### Sneak Peak
+![image](https://github.com/roskzhu/Empa/assets/110139243/6abaec4c-3acb-4fe6-b937-90f18bde2050)
+
 
 ## Next Steps
-- [X] real-time updating radar chart
-- [ ] add firebase for accounts and database
-- [ ] deployment
-- [ ] demo video
+- [X] Radar chart updating live on real-time footage
+- [ ] Adding detection for emotions detected in vocal tone & body language for improved conversation suggestions
+- [ ] Adding accounts and database?
+- [ ] Deployment
+- [ ] Demo Video
