@@ -19,7 +19,7 @@
 
 ![landing](https://github.com/roskzhu/Empa/assets/110139243/69dcafa4-f4e0-404b-be2d-c92247d32c6c)
 
-![demo](https://github.com/roskzhu/Empa/blob/demo/demo.mp4?raw=true)
+![demo](./demo.mp4)
 
 
 Empa is a full-stack web application that leverages computer vision and machine learning to analyze facial expressions and translate them into recognizable emotions. It's designed to assist individuals with communication disorders in social interactions, help those on the autism spectrum understand emotional cues, and enhance empathy in diverse, cross-cultural communications.
