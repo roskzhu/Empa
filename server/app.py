@@ -16,7 +16,6 @@ load_dotenv()
 
 # Get your OpenAI API key from an environment variable
 api_key = os.environ.get('OPENAI_API_KEY')
-print(api_key)
 
 # Check if the API key is available
 if api_key is None:
