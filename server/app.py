@@ -86,7 +86,7 @@ def receive_data():
         probabilities_list = probabilities.tolist()
 
         # radar chart display order is: ['Neutral', 'Sadness', 'Anger', 'Disgust', 'Fear', 'Surprise', 'Happiness'],
-        # model order is: anger, disgust, fwear, happy, neutral, sad, surprise
+        # model order is: anger, disgust, fear, happy, neutral, sad, surprise
         rearranged_list = [probabilities_list[0][4], probabilities_list[0][5], probabilities_list[0][0], probabilities_list[0][1], probabilities_list[0][2], probabilities_list[0][6], probabilities_list[0][3]]  # reorder the list to match the order of emotions in the model
    
         for i in range(len(rearranged_list)):
@@ -101,4 +101,4 @@ def receive_data():
     
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
