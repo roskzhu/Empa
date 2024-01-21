@@ -90,6 +90,5 @@ _(localhost:3000 by default)_
 ## Next Steps
 - [X] Radar chart updating live on real-time footage
 - [ ] Adding detection for emotions detected in vocal tone & body language for improved conversation suggestions
-- [ ] Adding accounts and database?
 - [ ] Deployment
-- [ ] Demo Video
+- [X] Demo Video
