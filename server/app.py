@@ -15,10 +15,10 @@ CORS(app)
 load_dotenv()
 
 # Get your OpenAI API key from an environment variable
-api_key = os.environ.get('OPENAI_API_KEY')
+openai.api_key = os.environ.get('OPENAI_API_KEY')
 
 # Check if the API key is available
-if api_key is None:
+if openai.api_key is None:
     raise ValueError("OpenAI API key is not set in the environment variable OPENAI_API_KEY")
 
 

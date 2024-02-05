@@ -60,6 +60,11 @@ function Main() {
 
   const landmarkDataRef = useRef([]); // Ref to store the latest landmark data
 
+  // require('dotenv').config();
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
+  // const apiUrl = "process.env.TEST";
+
+
   const sendLandmarkData = () => {
     console.log(landmarkDataRef.current);
     axios
@@ -70,6 +75,7 @@ function Main() {
         console.log("Data sent successfully");
         probabilities = response.data.probabilities;
         console.log("Probabilities:", probabilities);
+        // console.log("env var: ", process.env.TEST)
 
         if (probabilities) {
           if (emotionCanvasRef.current) {
@@ -213,6 +219,8 @@ function Main() {
   // Define a state variable to store the server response
   const [serverResponse, setServerResponse] = useState(null);
 
+  const generatePhrasesUrl = `${serverUrl}/generate_phrases`;
+
   const startTranscription = () => {
     setIsTranscribing(true);
 
@@ -242,7 +250,8 @@ function Main() {
       console.log("Transcript:", speechToText);
 
       // Send the transcript to the server
-      fetch("http://localhost:5000/generate_phrases", {
+      // fetch("http://localhost:5000/generate_phrases", {
+      fetch(`https://empa-production.up.railway.app/generate_phrases`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -279,13 +288,13 @@ function Main() {
   // State to manage the input message
   const [message, setMessage] = useState("");
 
-  // Event handler for sending a message
+  // Event handler for sending a message from text box
   const sendMessage = () => {
     console.log("Message sent:", message);
 
     // Call the generate_phrases endpoint with the message
     axios
-      .post("http://localhost:5000/generate_phrases", {
+      .post(`${generatePhrasesUrl}`, {  // https://empa-production.up.railway.app/generate_phrases
         transcript: message,
       })
       .then((response) => {
@@ -340,6 +349,9 @@ function Main() {
               className="emotion-radar-canvas"
             ></canvas>
           </div>
+       {/* <div>
+        <p>API URL: {apiUrl}</p>
+          </div> */}
         </div>
 
         <div className="justify-end w-full right-0 relative ml-[950px] flex">

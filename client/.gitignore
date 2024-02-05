@@ -23,3 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 package-lock.json
+
+firebase-config.js
+src/components/auth/auth.js
