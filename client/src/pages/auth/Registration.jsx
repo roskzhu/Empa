@@ -1,5 +1,3 @@
-// File: Registration.jsx
-
 import { useState, useEffect } from "react";
 import { setupAuthListener, auth } from "./auth"; // Adjust the path accordingly
 import { Link, useNavigate } from "react-router-dom";
@@ -10,6 +8,7 @@ import {
   signInWithRedirect,
   updateProfile,
 } from "firebase/auth";
+import Logo from "../../components/ui/logo";
 
 
 function Registration() {
@@ -86,35 +85,32 @@ function Registration() {
       });
   };
 
-  useEffect(() => {
-    const unsubscribe = setupAuthListener((user) => {
-      if (user) {
-        // User is signed in
-        const uid = user.uid;
-        // Do something with the authenticated user
-      } else {
-        // User is signed out
-        // Redirect or show login form
-      }
-    });
+  // useEffect(() => {
+  //   const unsubscribe = setupAuthListener((user) => {
+  //     if (user) {
+  //       // User is signed in
+  //       const uid = user.uid;
+  //       // Do something with the authenticated user
+  //     } else {
+  //       // User is signed out
+  //       // Redirect or show login form
+  //     }
+  //   });
 
-    return () => {
-      // Cleanup when the component unmounts
-      unsubscribe();
-    };
-  }, []);
+  //   return () => {
+  //     // Cleanup when the component unmounts
+  //     unsubscribe();
+  //   };
+  // }, []);
 
   return (
-    // <div>
-    //   <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-    //   <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-    //   <button onClick={handleSignUp}>Sign Up</button>
-    //   <button onClick={handleSignIn}>Sign In</button>
-    // </div>
     <div className="flex h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-white">
       <div className="max-w-sm mx-auto w-full">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
-          <div className="w-14">{/* <Logo /> */}</div>
+          <div className="w-14">
+            <Logo />
+            {/* <img className='w-1/3' src='/assets/blob1.png' alt='Image Description'/> */}
+          </div>
           <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-black">
             Learn more with Empa
           </h2>
@@ -127,7 +123,7 @@ function Registration() {
               alt="google logo"
             />
             <span className="block w-max font-semibold tracking-wide text-black text-sm transition duration-300 group-hover:text-lightPurple sm:text-base">
-              Continue with Google
+              Sign Up with Google
             </span>
           </div>
         </button>
@@ -136,7 +132,27 @@ function Registration() {
         </div>
 
         <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-2" onSubmit={handleSignUp}>
+          <form className="space-y-2" onSubmit={SignUp}>
+           <div>
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium leading-6 text-black"
+              >
+                Name
+              </label>
+              <div className="mt-1">
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  className="pl-2 block w-full rounded-md border-2 py-1.5 bg-white text-black shadow-sm placeholder:text-gray-400 focus:border-indigo-600"
+                />
+              </div>
+            </div>
+
             <div>
               <label
                 htmlFor="email"
@@ -180,11 +196,34 @@ function Registration() {
             </div>
 
             <div>
+              <div className="flex items-center justify-between">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-black"
+                  >
+                  Confirm password
+                </label>
+              </div>
+              <div className="mt-1">
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  autoComplete="new-password"
+                  required
+                  className="pl-2 block w-full rounded-md border-2 py-1.5 bg-white text-black shadow-sm placeholder:text-gray-400 focus:border-indigo-600"
+                />
+              </div>
+            </div>
+
+            <div>
               <button
                 type="submit"
                 className="mt-8 flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500"
               >
-                Sign in
+                Create Account
               </button>
             </div>
 

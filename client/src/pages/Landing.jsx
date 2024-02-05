@@ -37,7 +37,7 @@ const Landing = () => {
         </button>
         </div>
         <div className='absolute justify-end flex align-center pt-40 pl-20'>
-          <img className='w-1/3' src='/blob1.png' alt='Image Description'/>
+          <img className='w-1/3' src='/assets/blob1.png' alt='Image Description'/>
         </div>
 
     </div>
