@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import os
 import openai
 import speech_recognition as sr
-import transcribe
+# import transcribe
 import pickle
 import pandas as pd
 
