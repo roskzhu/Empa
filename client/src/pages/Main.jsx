@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import Webcam from "react-webcam";
+// import Webcam from "react-webcam";
 import { FaceMesh } from "@mediapipe/face_mesh";
 import * as cam from "@mediapipe/camera_utils";
 import { drawConnectors, drawLandmarks } from "@mediapipe/drawing_utils";
@@ -16,19 +16,19 @@ import axios from "axios";
 import createEmotionRadarChart from "../components/emotionRadar";
 import "../components/emotionRadar.css";
 import "./Main.css";
+import { Link } from "react-router-dom";
 
 function Main() {
-  const [showWebcam, setShowWebcam] = useState(false);
-
-  const handleToggle = () => {
-    setShowWebcam((prevShowWebcam) => !prevShowWebcam);
-  };
+  // const [showWebcam, setShowWebcam] = useState(false);  // delete
+  const [stream, setStream] = useState(null);
+  const [boxes, setBoxes] = useState([]);
+  const videoRef = useRef(null);
 
   // Emotion Radar Chart
   const emotionCanvasRef = useRef(null);
   const chartRef = useRef(null);
 
-  let probabilities = [0, 10, 0, 0, 0, 0, 0];
+  let probabilities = [10, 10, 10, 10, 10, 10, 10];
 
   useEffect(() => {
     if (emotionCanvasRef.current) {
@@ -53,7 +53,7 @@ function Main() {
   }, []);
 
   // Face Landmarking
-  const webcamRef = useRef(null);
+  // const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const connect = window.drawConnectors;
   var camera = null;
@@ -62,9 +62,30 @@ function Main() {
 
   // require('dotenv').config();
   const serverUrl = process.env.REACT_APP_SERVER_URL;
-  // const apiUrl = "process.env.TEST";
+  
+  // Screen Capture
+  async function startStream() {
+    try {
+      const mediaStream = await navigator.mediaDevices.getDisplayMedia({
+        video: { mediaSource: "screen" },
+      });
+      setStream(mediaStream);
+    } catch (error) {
+      console.error("Error accessing screen capture:", error);
+    }
+  }
+  function closeStream() {
+    if (stream) {
+      const tracks = stream.getTracks();
+      tracks.forEach((track) => track.stop());
+      setStream(null);
+      setBoxes([]);
+    }
+  }
 
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => () => closeStream(), []);
+  
   const sendLandmarkData = () => {
     console.log(landmarkDataRef.current);
     axios
@@ -128,15 +149,25 @@ function Main() {
   }, []);
 
   function onResults(results) {
-    // const video = webcamRef.current.video;
-    const videoWidth = webcamRef.current.video.videoWidth;
-    const videoHeight = webcamRef.current.video.videoHeight;
+    const video = videoRef.current;
+    const canvasElement = canvasRef.current;
+
+    if (!video) {
+      console.error("Video elements not available");
+      return;
+    } 
+    // else if (!canvasElement) {
+    //   console.error("canvas elements not available");
+    //   return;
+    // }
+
+    const videoWidth = video.videoWidth;
+    const videoHeight = video.videoHeight;
 
     // Set canvas width
     canvasRef.current.width = videoWidth;
     canvasRef.current.height = videoHeight;
 
-    const canvasElement = canvasRef.current;
     const canvasCtx = canvasElement.getContext("2d");
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
@@ -182,9 +213,8 @@ function Main() {
     }
     canvasCtx.restore();
   }
-  // }
 
-  // setInterval(())
+  
   useEffect(() => {
     // Initialize faceMesh inside useEffect
     const faceMesh = new FaceMesh({
@@ -200,17 +230,41 @@ function Main() {
 
     faceMesh.onResults(onResults);
 
-    if (webcamRef.current) {
-      camera = new cam.Camera(webcamRef.current.video, {
+    // if (webcamRef.current) {
+    //   camera = new cam.Camera(webcamRef.current.video, {
+    //     onFrame: async () => {
+    //       await faceMesh.send({ image: webcamRef.current.video });
+    //     },
+    //     width: 640,
+    //     height: 480,
+    //   });
+    //   camera.start();
+    // }
+
+    if (stream && videoRef.current) {
+      videoRef.current.srcObject = stream;
+
+      // Add onFrame logic for FaceMesh
+      const camera = new cam.Camera(videoRef.current, {
         onFrame: async () => {
-          await faceMesh.send({ image: webcamRef.current.video });
+          await faceMesh.send({ image: videoRef.current });
         },
-        width: 640,
-        height: 480,
+        width: videoRef.current.width,
+        height: videoRef.current.height,
       });
+      console.log("videoRef.current.width: ");
       camera.start();
+
+      stream.getTracks().forEach((track) => {
+        track.onended = () => {
+          console.log("The screen capture was closed");
+          setStream(null);
+          setBoxes([]);
+          faceMesh.send({ image: videoRef.current });
+        };
+      });
     }
-  }, []);
+  }, [stream]);
 
   // Audio Transcription
   const [transcript, setTranscript] = useState("");
@@ -311,8 +365,11 @@ function Main() {
   return (
     <div className="background-gradient p-20 pt-[110px]">
       <div className="Main grid grid-cols-5 gap-4">
-        <div className="webcam-container flex col-span-3">
-          {showWebcam && (
+        <div className="webcam-container flex col-span-3
+                        rounded-xl outline outline-on-surface 
+                        flex justify-center items-center relative
+                        ">
+          {/* {showWebcam && (
             <Webcam
               ref={webcamRef}
               style={{ width: "100%", borderRadius: "12px" }}
@@ -327,19 +384,91 @@ function Main() {
                 display: showWebcam ? "none" : "block",
                 width: "100%",
               }}
-            />
+            /> */}
 
-            {/* <button
+        {/* {stream && (
+            <video
+              ref={videoRef}
+              style={{ width: "100%", borderRadius: "12px" }}
+            />
+          )}
+          <div style={{ flex: 1 }}>
+
+            <video
+                ref={videoRef}
+                className="object-fill"
+                autoPlay
+                playsInline
+                muted
+                style={{ maxWidth: "100%" }}
+              />
+
+            <canvas
+              ref={canvasRef}
               style={{
-                position: "absolute",
-                bottom: 0,
-                left: 0,
-                zIndex: 1,
+                display: showWebcam ? "none" : "block",
+                width: "100%",
               }}
-              onClick={handleToggle}
-            >
-              toggle
-            </button> */}
+            /> */}
+            {stream ? (
+              <div className="relative rounded-xl">
+                <video
+                  ref={videoRef}
+                  className="object-fill"
+                  autoPlay
+                  playsInline
+                  muted
+                  style={{ maxWidth: "100%" }}
+                />
+                {/* {showGrid && boxes.map((box, i) => (
+                  <div
+                    style={{
+                      left: `${box[0][0] * 100}%`,
+                      top: `${box[0][1] * 100}%`,
+                      position: "absolute",
+                      width: `${box[1][0] * 100}%`,
+                      height: `${box[1][1] * 100}%`,
+                      outlineWidth: "3px",
+                      outlineColor: "#0F0",
+                      outlineStyle: "solid",
+                    }}
+                    key={i}
+                  />
+                ))} */}
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center">
+                {/* <Image
+                  src="/MotiSpectra-logos_white.png"
+                  alt="MotiSpectra"
+                  width={250}
+                  height={200}
+                /> */}
+                <p className="text-headline-small font-mono font-bold">
+                  Use the toolbar below to start screensharing
+                </p>
+              </div>
+            )}
+
+          <div className="flex gap-4">
+          <Link onClick={startStream} disabled={!!stream} className="font-mono font-bold">
+            Start Screensharing
+          </Link>
+          <Link onClick={closeStream} disabled={!stream} className="bg-error font-mono font-bold">
+            Stop Screensharing
+          </Link>
+          {/* <Button
+            onClick={() => setShowGrid(!showGrid)}
+          >
+            Toggle Face Grid
+          </Button>
+          <Button
+            onClick={() => setShowLandmark(!showLandmark)}
+          >
+            Toggle Face Landmarks
+          </Button> */}
+        </div>
+
           </div>
         </div>
         <div className="bg-white flex col-span-2 rounded-xl justify-center">
@@ -409,14 +538,11 @@ function Main() {
                   ))}
                 </div>
               )}
-              {/* <h3>
-              {test}
-            </h3> */}
             </div>
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

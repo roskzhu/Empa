@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { setupAuthListener, auth } from "./auth"; // Adjust the path accordingly
+import { setupAuthListener, auth } from "./auth"; 
 import { Link, useNavigate } from "react-router-dom";
 import {
   GoogleAuthProvider,
@@ -233,12 +233,12 @@ function Registration() {
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            Don't have an account yet?{" "}
+            Already have an account?{" "}
             <Link
-              to="/signup"
+              to="/signin"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
-              Create one
+              Log in
             </Link>
           </p>
         </div>

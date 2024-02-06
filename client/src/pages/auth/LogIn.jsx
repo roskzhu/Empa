@@ -1,64 +1,65 @@
 import { useState, useEffect } from "react";
-import { signUp, signIn, setupAuthListener } from "./auth"; // Adjust the path accordingly
+import { setupAuthListener, auth } from "./auth"; 
 import { Link, useNavigate } from "react-router-dom";
+import {
+  GoogleAuthProvider,
+  getRedirectResult,
+  signInWithEmailAndPassword,
+  signInWithRedirect,
+} from "firebase/auth";
+import Logo from "../../components/ui/logo";
+
 
 function LogInComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSignIn = (e) => {
+  const navigate = useNavigate();
+
+  const SignIn = async (e) => {
     e.preventDefault();
-
-    // Password check
-    if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match.");
-      return;
-    }
-
-    // Clear error message
-    setErrorMessage("");
-
-    signIn(email, password)
-      .then((user) => {
-        console.log("User signed in successfully:", user);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        navigate("/dashboard");
       })
       .catch((error) => {
-        console.error("Error during sign-in:", error);
+        if (error.code === "auth/invalid-login-credentials") {
+          setErrorMessage(
+            "Invalid login credentials. Please check your email and password."
+          );
+        } else {
+          console.log(error);
+        }
       });
   };
 
-  useEffect(() => {
-    const unsubscribe = setupAuthListener((user) => {
-      if (user) {
-        // User is signed in
-        const uid = user.uid;
-        // Do something with the authenticated user
-      } else {
-        // User is signed out
-        // Redirect or show login form
-      }
-    });
+  const GoogleLogin = async () => {
+    const googleProvider = new GoogleAuthProvider();
+    signInWithRedirect(auth, googleProvider);
+  };
 
-    return () => {
-      // Cleanup when the component unmounts
-      unsubscribe();
-    };
-  }, []);
+  useEffect(() => {
+    getRedirectResult(auth)
+      .then((result) => {
+        if (result && result.user) {
+          navigate("/dashboard");
+        }
+        // setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        // setLoading(false);
+      });
+  }, [auth, navigate]);
 
   return (
-    // <div>
-    //   <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-    //   <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-    //   <button onClick={handleSignUp}>Sign Up</button>
-    //   <button onClick={handleSignIn}>Sign In</button>
-    // </div>
     <div className="flex h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-white">
       <div className="max-w-sm mx-auto w-full">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
-          <div className="w-14">{/* <Logo /> */}</div>
+          <div className="w-14">
+            <Logo />
+          </div>
           <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-black">
             Learn more with Empa
           </h2>
@@ -80,7 +81,7 @@ function LogInComponent() {
         </div>
 
         <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-2" onSubmit={handleSignUp}>
+          <form className="space-y-2" onSubmit={SignIn}>
             <div>
               <label
                 htmlFor="email"
