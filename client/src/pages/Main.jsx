@@ -132,6 +132,12 @@ function Main() {
     const videoWidth = webcamRef.current.video.videoWidth;
     const videoHeight = webcamRef.current.video.videoHeight;
 
+    if (canvasRef.current) {
+      console.log("canvasRef.current:", canvasRef.current);
+    } else {
+      console.error("canvasRef.current is undefined");
+    }
+
     // Set canvas width
     canvasRef.current.width = videoWidth;
     canvasRef.current.height = videoHeight;
