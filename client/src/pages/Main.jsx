@@ -188,9 +188,7 @@ function Main() {
     }
     canvasCtx.restore();
   }
-  // }
-
-  // setInterval(())
+  
   useEffect(() => {
     // Initialize faceMesh inside useEffect
     const faceMesh = new FaceMesh({
@@ -318,12 +316,12 @@ function Main() {
     <div className="background-gradient p-20 pt-[110px]">
       <div className="Main grid grid-cols-5 gap-4">
         <div className="webcam-container flex col-span-3">
-          {showWebcam && (
+          {/* {showWebcam && (
             <Webcam
               ref={webcamRef}
               style={{ width: "100%", borderRadius: "12px" }}
             />
-          )}
+          )} */}
           <div style={{ flex: 1 }}>
             <Webcam ref={webcamRef} style={{ width: "100%", height: "auto" }} />
 
@@ -334,18 +332,7 @@ function Main() {
                 width: "100%",
               }}
             />
-
-            {/* <button
-              style={{
-                position: "absolute",
-                bottom: 0,
-                left: 0,
-                zIndex: 1,
-              }}
-              onClick={handleToggle}
-            >
-              toggle
-            </button> */}
+            
           </div>
         </div>
         <div className="bg-white flex col-span-2 rounded-xl justify-center">
@@ -355,9 +342,7 @@ function Main() {
               className="emotion-radar-canvas"
             ></canvas>
           </div>
-       {/* <div>
-        <p>API URL: {apiUrl}</p>
-          </div> */}
+
         </div>
 
         <div className="justify-end w-full right-0 relative ml-[950px] flex">
