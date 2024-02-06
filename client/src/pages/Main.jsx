@@ -21,7 +21,6 @@ import { Link } from "react-router-dom";
 function Main() {
   // const [showWebcam, setShowWebcam] = useState(false);  // delete
   const [stream, setStream] = useState(null);
-  const [boxes, setBoxes] = useState([]);
   const videoRef = useRef(null);
 
   // Emotion Radar Chart
@@ -29,9 +28,10 @@ function Main() {
   const chartRef = useRef(null);
 
   let probabilities = [10, 10, 10, 10, 10, 10, 10];
+  let isStreamOn = false;
 
   useEffect(() => {
-    if (emotionCanvasRef.current) {
+    if (emotionCanvasRef.current && stream) {
       // Destroy the previous chart
       if (chartRef.current) {
         chartRef.current.destroy();
@@ -53,7 +53,6 @@ function Main() {
   }, []);
 
   // Face Landmarking
-  // const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const connect = window.drawConnectors;
   var camera = null;
@@ -70,6 +69,8 @@ function Main() {
         video: { mediaSource: "screen" },
       });
       setStream(mediaStream);
+      isStreamOn = true;
+      console.log("Stream open: ", isStreamOn);
     } catch (error) {
       console.error("Error accessing screen capture:", error);
     }
@@ -79,7 +80,8 @@ function Main() {
       const tracks = stream.getTracks();
       tracks.forEach((track) => track.stop());
       setStream(null);
-      setBoxes([]);
+      isStreamOn = false;
+      console.log("Stream closed: ", isStreamOn);
     }
   }
 
@@ -87,6 +89,11 @@ function Main() {
   useEffect(() => () => closeStream(), []);
   
   const sendLandmarkData = () => {
+    if (!isStreamOn) {
+      console.log("Stream not open");
+      return;
+    }
+
     console.log(landmarkDataRef.current);
     axios
       .post("http://127.0.0.1:5000/receive_data", {
@@ -98,12 +105,12 @@ function Main() {
         console.log("Probabilities:", probabilities);
         // console.log("env var: ", process.env.TEST)
 
-        if (probabilities) {
+        if (probabilities && isStreamOn) {
           if (emotionCanvasRef.current) {
             // Destroy the previous chart
             if (chartRef.current) {
               chartRef.current.destroy();
-              console.log("chartRef.current:", chartRef.current);
+              // console.log("chartRef.current:", chartRef.current);
             }
 
             // Create a new chart
@@ -111,7 +118,7 @@ function Main() {
               emotionCanvasRef.current,
               probabilities
             );
-            console.log("emotionCanvasRef.current:", emotionCanvasRef.current);
+            // console.log("emotionCanvasRef.current:", emotionCanvasRef.current);
           }
         } else {
           console.error(
@@ -140,7 +147,8 @@ function Main() {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      if (landmarkDataRef.current.length > 0) {
+      if (isStreamOn && landmarkDataRef.current.length > 0) {
+        console.log("Sending landmark data: ", isStreamOn)
         sendLandmarkData();
       }
     }, 1000);
@@ -152,28 +160,43 @@ function Main() {
     const video = videoRef.current;
     const canvasElement = canvasRef.current;
 
-    if (!video) {
-      console.error("Video elements not available");
+    if (!video || !canvasElement || !(canvasRef.current)) {
+      console.error("Video or canvas elements not available");
       return;
     } 
+    // if (!isStreamOn) {
+    //   console.log("Stream not open");
+    //   return;
+    // }
 
-    const videoWidth = video.videoWidth;
-    const videoHeight = video.videoHeight;
 
-    // Set canvas width
-    canvasRef.current.width = videoWidth;
-    canvasRef.current.height = videoHeight;
+    // const videoWidth = video.videoWidth;
+    // const videoHeight = video.videoHeight;
 
-    const canvasCtx = canvasElement.getContext("2d");
-    canvasCtx.save();
-    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-    canvasCtx.drawImage(
-      results.image,
-      0,
-      0,
-      canvasElement.width,
-      canvasElement.height
-    );
+    const videoWidth = 640;
+    const videoHeight = 480;
+
+    console.log("videoRef.current: ", videoRef.current);
+
+    if (canvasRef.current && canvasRef.current.getContext("2d")) {
+      console.log("canvasRef.current: ", canvasRef.current);
+      // canvasRef.current.width = videoWidth;
+      // canvasRef.current.height = videoHeight;
+  
+      const canvasCtx = canvasRef.current.getContext("2d");
+      canvasCtx.save();
+      // canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+      canvasCtx.clearRect(0, 0, 640, 480);
+      canvasCtx.drawImage(
+        results.image,
+        0,
+        0,
+        640,
+        480
+        // canvasElement.width,
+        // canvasElement.height
+      );
+  
     if (results.multiFaceLandmarks) {
       for (const landmarks of results.multiFaceLandmarks) {
         drawConnectors(canvasCtx, landmarks, FACEMESH_TESSELATION, {
@@ -208,6 +231,10 @@ function Main() {
       );
     }
     canvasCtx.restore();
+  } else {
+    console.error("Canvas or 2D context is null");
+  }
+
   }
 
   
@@ -226,17 +253,6 @@ function Main() {
 
     faceMesh.onResults(onResults);
 
-    // if (webcamRef.current) {
-    //   camera = new cam.Camera(webcamRef.current.video, {
-    //     onFrame: async () => {
-    //       await faceMesh.send({ image: webcamRef.current.video });
-    //     },
-    //     width: 640,
-    //     height: 480,
-    //   });
-    //   camera.start();
-    // }
-
     if (stream && videoRef.current) {
       videoRef.current.srcObject = stream;
 
@@ -245,17 +261,17 @@ function Main() {
         onFrame: async () => {
           await faceMesh.send({ image: videoRef.current });
         },
-        width: videoRef.current.width,
-        height: videoRef.current.height,
+        // width: videoRef.current?.width || 640,
+        // height: videoRef.current?.height || 480,
+        width: 640,
+        height: 480,
       });
-      console.log("videoRef.current.width: ");
       camera.start();
 
       stream.getTracks().forEach((track) => {
         track.onended = () => {
           console.log("The screen capture was closed");
           setStream(null);
-          setBoxes([]);
           faceMesh.send({ image: videoRef.current });
         };
       });
@@ -333,7 +349,6 @@ function Main() {
   };
 
   const json_string_data = JSON.stringify(serverResponse, null, 2);
-  // console.log('ser[0]: ', serverResponse.phrases);
 
   // State to manage the input message
   const [message, setMessage] = useState("");
@@ -365,47 +380,6 @@ function Main() {
                         rounded-xl outline outline-on-surface 
                         flex justify-center items-center relative
                         ">
-          {/* {showWebcam && (
-            <Webcam
-              ref={webcamRef}
-              style={{ width: "100%", borderRadius: "12px" }}
-            />
-          )}
-          <div style={{ flex: 1 }}>
-            <Webcam ref={webcamRef} style={{ width: "100%", height: "auto" }} />
-
-            <canvas
-              ref={canvasRef}
-              style={{
-                display: showWebcam ? "none" : "block",
-                width: "100%",
-              }}
-            /> */}
-
-        {/* {stream && (
-            <video
-              ref={videoRef}
-              style={{ width: "100%", borderRadius: "12px" }}
-            />
-          )}
-          <div style={{ flex: 1 }}>
-
-            <video
-                ref={videoRef}
-                className="object-fill"
-                autoPlay
-                playsInline
-                muted
-                style={{ maxWidth: "100%" }}
-              />
-
-            <canvas
-              ref={canvasRef}
-              style={{
-                display: showWebcam ? "none" : "block",
-                width: "100%",
-              }}
-            /> */}
             {stream ? (
               <div className="relative rounded-xl">
                 <video
@@ -414,27 +388,12 @@ function Main() {
                   autoPlay
                   playsInline
                   muted
-                  style={{ maxWidth: "100%" }}
+                  style={{ maxWidth: "100%" , display: "none"}}
                 />
-                {/* {showGrid && boxes.map((box, i) => (
-                  <div
-                    style={{
-                      left: `${box[0][0] * 100}%`,
-                      top: `${box[0][1] * 100}%`,
-                      position: "absolute",
-                      width: `${box[1][0] * 100}%`,
-                      height: `${box[1][1] * 100}%`,
-                      outlineWidth: "3px",
-                      outlineColor: "#0F0",
-                      outlineStyle: "solid",
-                    }}
-                    key={i}
-                  />
-                ))} */}
                 <canvas
                   ref={canvasRef}
                   style={{
-                    display: stream ? "none" : "block",
+                    display: "block",
                     width: "100%",
                   }}
                 />
@@ -442,8 +401,8 @@ function Main() {
             ) : (
               <div className="flex flex-col items-center justify-center">
                 {/* <Image
-                  src="/MotiSpectra-logos_white.png"
-                  alt="MotiSpectra"
+                  src="/Empa-logos_white.png"
+                  alt="Empa"
                   width={250}
                   height={200}
                 /> */}
@@ -481,9 +440,7 @@ function Main() {
               className="emotion-radar-canvas"
             ></canvas>
           </div>
-       {/* <div>
-        <p>API URL: {apiUrl}</p>
-          </div> */}
+
         </div>
 
         <div className="justify-end w-full right-0 relative ml-[950px] flex">
@@ -533,9 +490,6 @@ function Main() {
               <h3 className="text-black max-w-[200px]">Suggested phrases:</h3>
               {serverResponse && (
                 <div className="text-black">
-                  {/* <pre>{JSON.stringify(serverResponse, null, 2)}</pre> */}
-                  {/* <pre>{serverResponse && serverResponse[0]}</pre> */}
-
                   {serverResponse.phrases.map((str, index) => (
                     <div key={index}>{str}</div>
                   ))}
@@ -545,7 +499,6 @@ function Main() {
           </div>
         </div>
       </div>
-    // </div>
   );
 }
 
