@@ -156,10 +156,6 @@ function Main() {
       console.error("Video elements not available");
       return;
     } 
-    // else if (!canvasElement) {
-    //   console.error("canvas elements not available");
-    //   return;
-    // }
 
     const videoWidth = video.videoWidth;
     const videoHeight = video.videoHeight;
@@ -435,6 +431,13 @@ function Main() {
                     key={i}
                   />
                 ))} */}
+                <canvas
+                  ref={canvasRef}
+                  style={{
+                    display: stream ? "none" : "block",
+                    width: "100%",
+                  }}
+                />
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center">
