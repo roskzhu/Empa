@@ -82,11 +82,6 @@ _(localhost:3000 by default)_
 3. `npm start`
 
 
-
-### Sneak Peak
-![image](https://github.com/roskzhu/Empa/assets/110139243/6abaec4c-3acb-4fe6-b937-90f18bde2050)
-
-
 ## Next Steps
 - [X] Radar chart updating live on real-time footage
 - [ ] Adding detection for emotions detected in vocal tone & body language for improved conversation suggestions
